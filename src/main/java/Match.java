@@ -21,6 +21,7 @@ public class Match {
         wins = calculateW(team1Score, team2Score);
         expectedWins = calculateExpectedWins();
 
+
     }
     public int calcImportance(String competitionType, String round){
         // add if conditions to calculate importance
@@ -42,6 +43,7 @@ public class Match {
     public double calcRatingDifference(double team1Points, double team2Points){
         return (team1Points - team2Points);
     }
+
     public Pair<Double, Double> calculateW(int team1Score, int team2Score){
         if (team1Score > team2Score){
             return new Pair<Double, Double>(1.0, 0.0);
