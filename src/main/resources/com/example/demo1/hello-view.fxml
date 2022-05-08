@@ -28,7 +28,10 @@
                <VBox>
                   <children>
                   
-                                  <Label fx:id="welcomeText" contentDisplay="CENTER" prefHeight="18.0" prefWidth="278.0" text="                  Team 1 " textAlignment="CENTER" textFill="WHITE" />
+                                  <Label fx:id="welcomeText" contentDisplay="CENTER" prefHeight="18.0" prefWidth="278.0" text="         Team 1 " textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                           <Font name="Bodoni MT" size="17.0" />
+                        </font></Label>
                      <ChoiceBox fx:id="team1_choice_box" prefHeight="26.0" prefWidth="121.0">
                         <VBox.margin>
                            <Insets />
@@ -49,7 +52,10 @@
                      <Insets />
                   </HBox.margin>
                   <children>
-                     <Label fx:id="welcomeText1" alignment="CENTER" prefHeight="18.0" prefWidth="278.0" text="Team 2" textFill="WHITE" />
+                     <Label fx:id="welcomeText1" alignment="CENTER" prefHeight="18.0" prefWidth="278.0" text="Team 2" textFill="WHITE">
+                        <font>
+                           <Font name="Bodoni MT Bold" size="17.0" />
+                        </font></Label>
                      <ChoiceBox fx:id="team2_choice_box" prefHeight="26.0" prefWidth="114.0" />
                   </children>
                </VBox>
@@ -83,6 +89,9 @@
                   <padding>
                      <Insets left="50.0" />
                   </padding>
+                  <font>
+                     <Font name="Book Antiqua Bold" size="15.0" />
+                  </font>
                </Label>
                <ChoiceBox fx:id="category_choice_box" prefHeight="26.0" prefWidth="183.0">
                   <HBox.margin>
@@ -100,6 +109,9 @@
                   <padding>
                      <Insets left="50.0" />
                   </padding>
+                  <font>
+                     <Font name="Book Antiqua Bold" size="15.0" />
+                  </font>
                </Label>
                <ChoiceBox fx:id="round_choice_box" prefHeight="26.0" prefWidth="183.0">
                   <HBox.margin>
@@ -117,6 +129,9 @@
                   <padding>
                      <Insets left="50.0" />
                   </padding>
+                  <font>
+                     <Font name="Book Antiqua Bold" size="15.0" />
+                  </font>
                </Label>
                <DatePicker prefHeight="26.0" prefWidth="183.0">
                   <HBox.margin>
