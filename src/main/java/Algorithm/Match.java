@@ -1,3 +1,5 @@
+package Algorithm;
+
 import javafx.util.Pair;
 
 public class Match {

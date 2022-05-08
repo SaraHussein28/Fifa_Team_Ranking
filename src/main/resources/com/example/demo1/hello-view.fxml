@@ -1,16 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.demo1.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+<VBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
+   <children>
+      <VBox id="VBox" alignment="CENTER" opacity="0.96" prefHeight="578.0" prefWidth="511.0" spacing="20.0" styleClass="bodybg" stylesheets="@background.css">
+          <padding>
+              <Insets bottom="20.0" left="45.0" right="20.0" top="20.0" />
+          </padding>
+         <Label fx:id="welcomeText2" alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="264.0" text="FIFA Team Ranking" textAlignment="JUSTIFY" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="27.0" />
+            </font>
+         </Label>
+         <HBox alignment="CENTER" prefHeight="46.0" prefWidth="589.0">
+            <children>
+               <VBox>
+                  <children>
+                  
+                                  <Label fx:id="welcomeText" contentDisplay="CENTER" prefHeight="18.0" prefWidth="278.0" text="                  Team 1 " textAlignment="CENTER" textFill="WHITE" />
+                     <ChoiceBox fx:id="team1_choice_box" prefHeight="26.0" prefWidth="121.0">
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                     </ChoiceBox>
+                  </children>
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+               </VBox>
+               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="VS" textAlignment="CENTER">
+                  <font>
+                     <Font size="34.0" />
+                  </font>
+               </Text>
+               <VBox alignment="CENTER">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                  <children>
+                     <Label fx:id="welcomeText1" alignment="CENTER" prefHeight="18.0" prefWidth="278.0" text="Team 2" textFill="WHITE" />
+                     <ChoiceBox fx:id="team2_choice_box" prefHeight="26.0" prefWidth="114.0" />
+                  </children>
+               </VBox>
+            </children>
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+         </HBox>
+         <Label fx:id="welcomeText1111" alignment="CENTER" prefHeight="18.0" prefWidth="108.0" text="Score" textAlignment="CENTER" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+         </Label>
+         <HBox alignment="CENTER" prefHeight="22.0" prefWidth="446.0">
+            <children>
+               <TextField prefHeight="26.0" prefWidth="37.0" />
+               <Line endX="-79.10711669921875" endY="0.09288066625595093" startX="-100.0" stroke="WHITE">
+                  <HBox.margin>
+                     <Insets left="10.0" right="10.0" />
+                  </HBox.margin>
+               </Line>
+               <TextField prefHeight="26.0" prefWidth="37.0" />
+            </children>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="22.0" prefWidth="446.0">
+            <children>
+               <Label fx:id="welcomeText11" alignment="TOP_LEFT" prefHeight="18.0" prefWidth="278.0" text="Category of the match" textFill="WHITE">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                  <padding>
+                     <Insets left="50.0" />
+                  </padding>
+               </Label>
+               <ChoiceBox fx:id="category_choice_box" prefHeight="26.0" prefWidth="183.0">
+                  <HBox.margin>
+                     <Insets right="30.0" />
+                  </HBox.margin>
+               </ChoiceBox>
+            </children>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="22.0" prefWidth="446.0">
+            <children>
+               <Label fx:id="welcomeText111" alignment="TOP_LEFT" prefHeight="18.0" prefWidth="278.0" text="Round" textFill="WHITE">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                  <padding>
+                     <Insets left="50.0" />
+                  </padding>
+               </Label>
+               <ChoiceBox fx:id="round_choice_box" prefHeight="26.0" prefWidth="183.0">
+                  <HBox.margin>
+                     <Insets right="30.0" />
+                  </HBox.margin>
+               </ChoiceBox>
+            </children>
+         </HBox>
+         <HBox alignment="CENTER" prefHeight="22.0" prefWidth="446.0">
+            <children>
+               <Label fx:id="welcomeText112" alignment="TOP_LEFT" prefHeight="18.0" prefWidth="278.0" text="Date of the match" textFill="WHITE">
+                  <HBox.margin>
+                     <Insets />
+                  </HBox.margin>
+                  <padding>
+                     <Insets left="50.0" />
+                  </padding>
+               </Label>
+               <DatePicker prefHeight="26.0" prefWidth="183.0">
+                  <HBox.margin>
+                     <Insets right="30.0" />
+                  </HBox.margin>
+               </DatePicker>
+            </children>
+         </HBox>
+          <Button fx:id="addMatchBtn" onAction="#onAddMatchButtonClick" prefHeight="26.0" prefWidth="115.0" text="Add Match" />
+         <Button fx:id="showFIFARankingBtn" onAction="#onShowRankingButtonClick" text="Show FIFA ranking" />
+      </VBox>
+   </children>
 </VBox>
