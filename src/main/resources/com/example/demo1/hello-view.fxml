@@ -6,15 +6,17 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <VBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
    <children>
-      <VBox id="VBox" alignment="CENTER" opacity="0.96" prefHeight="578.0" prefWidth="511.0" spacing="20.0" styleClass="bodybg" stylesheets="@background.css">
+      <VBox id="VBox" alignment="CENTER" opacity="0.96" prefHeight="600.0" prefWidth="600.0" spacing="20.0" styleClass="bodybg" stylesheets="@background.css">
           <padding>
               <Insets bottom="20.0" left="45.0" right="20.0" top="20.0" />
           </padding>
@@ -23,47 +25,32 @@
                <Font name="System Bold" size="27.0" />
             </font>
          </Label>
-         <HBox alignment="CENTER" prefHeight="46.0" prefWidth="589.0">
+         <AnchorPane prefHeight="96.0" prefWidth="543.0">
             <children>
-               <VBox>
+               <VBox layoutX="46.0" layoutY="-20.0" />
+               <ImageView fitHeight="130.0" fitWidth="130.0" layoutX="192.0" layoutY="-10.0">
+                  <image>
+                     <Image url="@game.png" />
+                  </image>
+               </ImageView>
+               <VBox alignment="CENTER" layoutX="264.0" layoutY="12.0">
                   <children>
-                  
-                                  <Label fx:id="welcomeText" contentDisplay="CENTER" prefHeight="18.0" prefWidth="278.0" text="         Team 1 " textAlignment="CENTER" textFill="WHITE">
-                        <font>
-                           <Font name="Bodoni MT" size="17.0" />
-                        </font></Label>
-                     <ChoiceBox fx:id="team1_choice_box" prefHeight="26.0" prefWidth="121.0">
-                        <VBox.margin>
-                           <Insets />
-                        </VBox.margin>
-                     </ChoiceBox>
-                  </children>
-                  <HBox.margin>
-                     <Insets />
-                  </HBox.margin>
-               </VBox>
-               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="VS" textAlignment="CENTER">
-                  <font>
-                     <Font size="34.0" />
-                  </font>
-               </Text>
-               <VBox alignment="CENTER">
-                  <HBox.margin>
-                     <Insets />
-                  </HBox.margin>
-                  <children>
-                     <Label fx:id="welcomeText1" alignment="CENTER" prefHeight="18.0" prefWidth="278.0" text="Team 2" textFill="WHITE">
+                     <Label fx:id="welcomeText1" alignment="CENTER" prefHeight="18.0" prefWidth="278.0" text="     Team 2" textFill="WHITE">
                         <font>
                            <Font name="Bodoni MT Bold" size="17.0" />
                         </font></Label>
-                     <ChoiceBox fx:id="team2_choice_box" prefHeight="26.0" prefWidth="114.0" />
                   </children>
                </VBox>
+               <ChoiceBox fx:id="team1_choice_box" layoutX="29.0" layoutY="47.0" prefHeight="26.0" prefWidth="121.0" />
+            
+                                  <Label fx:id="welcomeText" contentDisplay="CENTER" layoutX="29.0" layoutY="11.0" prefHeight="22.0" prefWidth="108.0" text="         Team 1 " textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                     <Font name="Bodoni MT Bold" size="17.0" />
+                  </font>
+               </Label>
+               <ChoiceBox fx:id="team2_choice_box" layoutX="354.0" layoutY="47.0" prefHeight="26.0" prefWidth="114.0" />
             </children>
-            <VBox.margin>
-               <Insets />
-            </VBox.margin>
-         </HBox>
+         </AnchorPane>
          <Label fx:id="welcomeText1111" alignment="CENTER" prefHeight="18.0" prefWidth="108.0" text="Score" textAlignment="CENTER" textFill="WHITE">
             <font>
                <Font name="System Bold" size="14.0" />
