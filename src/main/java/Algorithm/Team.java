@@ -1,3 +1,5 @@
+package Algorithm;
+
 public class Team {
     private String name;
     private double points;
