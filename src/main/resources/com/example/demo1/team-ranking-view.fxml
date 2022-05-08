@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane opacity="0.9" prefHeight="578.0" prefWidth="511.0" styleClass="bodybg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.TeamRankingController">
+   <children>
+      <Text fill="WHITE" layoutX="109.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 10 FIFA WORLD RANKING " textAlignment="CENTER" wrappingWidth="305.9522705078125">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="month_choice_box" layoutX="193.0" layoutY="82.0" prefHeight="26.0" prefWidth="125.0" />
+   </children>
+</AnchorPane>
