@@ -11,17 +11,21 @@ public class Match {
     private int importance;
     private String competitionType;
     private String round;
+    private Boolean PSO;
 
 
     public Match(Team team1, Team team2, String competitionType, String round,
-                 int team1Score, int team2Score, int importance) {
+                 int team1Score, int team2Score, int importance, Boolean PSO) {
         this.team1 = team1;
         this.team2 = team2;
         this.competitionType = competitionType;
         this.round = round;
+        this.PSO = PSO;
         this.importance = calcImportance(competitionType, round);
-        wins = calculateW(team1Score, team2Score);
+        wins = calculateWins(team1Score, team2Score);
         expectedWins = calculateExpectedWins();
+        team1.calculateNewPoints(importance,wins.getKey(),expectedWins.getKey());
+        team1.calculateNewPoints(importance,wins.getValue(),expectedWins.getValue());
 
 
     }
@@ -37,7 +41,7 @@ public class Match {
         double team1ExpectedWin = calcTeamExpectedWin(drTeam1);
         double team2ExpectedWin = calcTeamExpectedWin(drTeam2);
 
-        return new Pair<Double, Double>(team1ExpectedWin, team2ExpectedWin);
+        return new Pair<>(team1ExpectedWin, team2ExpectedWin);
     }
     public double calcTeamExpectedWin(double dr){
         return 1/(Math.pow(10, -dr/600)+1);
@@ -46,14 +50,20 @@ public class Match {
         return (team1Points - team2Points);
     }
 
-    public Pair<Double, Double> calculateW(int team1Score, int team2Score){
+    public Pair<Double, Double> calculateWins(int team1Score, int team2Score){
         if (team1Score > team2Score){
-            return new Pair<Double, Double>(1.0, 0.0);
+            if (this.PSO){
+                return new Pair<>(0.75, 0.5);
+            }
+            return new Pair<>(1.0, 0.0);
         }
         else if (team1Score < team2Score) {
-            return new Pair<Double, Double>(0.0, 1.0);
+            if (this.PSO){
+                return new Pair<>(0.5, 0.75);
+            }
+            return new Pair<>(0.0, 1.0);
         }
-        return new Pair<Double, Double>(0.5, 0.5);
+        return new Pair<>(0.5, 0.5);
     }
 
     public Team getTeam1() {

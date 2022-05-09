@@ -36,13 +36,13 @@ public class Team {
         this.rank = rank;
     }
 
-    public void calculateNewPoints(int importance, int win, int expectedWin){
-        int winDiff = calcWinDiff(win, expectedWin);
+    public void calculateNewPoints(int importance, double win, double expectedWin){
+        double winDiff = calcWinDiff(win, expectedWin);
 
         this.setPoints(this.points + importance * winDiff);
 
     }
-    public int calcWinDiff(int win, int expectedWin){
+    public double calcWinDiff(double win, double expectedWin){
         return win - expectedWin;
     }
 }
