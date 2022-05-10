@@ -24,8 +24,12 @@ public class Match {
         this.importance = calcImportance(competitionType, round);
         wins = calculateWins(team1Score, team2Score);
         expectedWins = calculateExpectedWins();
-        team1.calculateNewPoints(importance,wins.getKey(),expectedWins.getKey());
-        team1.calculateNewPoints(importance,wins.getValue(),expectedWins.getValue());
+        Boolean knockOutRounds = false;
+        if (this.round != "Group Stage"){
+            knockOutRounds = true;
+        }
+        team1.calculateNewPoints(importance,wins.getKey(),expectedWins.getKey(), knockOutRounds);
+        team2.calculateNewPoints(importance,wins.getValue(),expectedWins.getValue(),knockOutRounds);
 
 
     }

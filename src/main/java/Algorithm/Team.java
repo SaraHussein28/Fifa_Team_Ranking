@@ -36,11 +36,12 @@ public class Team {
         this.rank = rank;
     }
 
-    public void calculateNewPoints(int importance, double win, double expectedWin){
+    public void calculateNewPoints(int importance, double win, double expectedWin, Boolean knockOutRounds){
         double winDiff = calcWinDiff(win, expectedWin);
 
-        this.setPoints(this.points + importance * winDiff);
-
+        if (win - expectedWin >= 0){
+            this.setPoints(this.points + importance * winDiff);
+        }
     }
     public double calcWinDiff(double win, double expectedWin){
         return win - expectedWin;
