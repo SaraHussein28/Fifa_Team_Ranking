@@ -75,7 +75,7 @@
                      <Font name="Book Antiqua Bold" size="18.0" />
                   </font>
                </Label>
-               <ChoiceBox fx:id="category_choice_box" layoutX="371.0" layoutY="70.0" onContextMenuRequested="#onCategoryDragDone" onDragDetected="#onCategoryDragDone" onDragDone="#onCategoryDragDone" onDragDropped="#onCategoryDragDone" onDragEntered="#onCategoryDragDone" onDragExited="#onCategoryDragDone" onDragOver="#onCategoryDragDone" onInputMethodTextChanged="#onCategoryDragDone" onKeyPressed="#onCategoryDragDone" onKeyReleased="#onCategoryDragDone" onKeyTyped="#onCategoryDragDone" onMouseClicked="#onCategoryDragDone" onMouseDragEntered="#onCategoryDragDone" onMouseDragExited="#onCategoryDragDone" onMouseDragOver="#onCategoryDragDone" onMouseDragReleased="#onCategoryDragDone" onMouseDragged="#onCategoryDragDone" onMouseEntered="#onCategoryDragDone" onMouseExited="#onCategoryDragDone" onMouseMoved="#onCategoryDragDone" onMousePressed="#onCategoryDragDone" onMouseReleased="#onCategoryDragDone" onScroll="#onCategoryDragDone" onScrollFinished="#onCategoryDragDone" onScrollStarted="#onCategoryDragDone" prefHeight="26.0" prefWidth="183.0" />
+               <ChoiceBox fx:id="category_choice_box" layoutX="371.0" layoutY="70.0" onAction="#onCategoryDragDone" prefHeight="26.0" prefWidth="183.0" />
                <Label fx:id="round_text" alignment="TOP_LEFT" layoutY="107.0" prefHeight="19.0" prefWidth="360.0" text="Within international match calendar?" textFill="WHITE">
                   <padding>
                      <Insets left="50.0" />
