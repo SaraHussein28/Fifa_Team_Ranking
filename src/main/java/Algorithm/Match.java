@@ -23,7 +23,7 @@ public class Match {
         this.PSO = PSO;
         this.importance = calcImportance(competitionType, round, inCalendar);
         wins = calculateWins(team1Score, team2Score,PSO);
-        expectedWins = calculateExpectedWins();
+        expectedWins = calculateExpectedWins(team1.getPoints(),team2.getPoints());
         Boolean immunity = calcImmunity(competitionType,round);         //true if a match is in the knockout stages of a final competition
         if (this.round != Rounds.Group_Stage){
             immunity = true;
@@ -69,9 +69,9 @@ public class Match {
                 return 0;       // if fore some reason the competition type isn't from the list
         }
     }
-    public Pair<Double, Double> calculateExpectedWins(){
-        double drTeam1 = calcRatingDifference(team1.getPoints(), team2.getPoints());
-        double drTeam2 = calcRatingDifference(team2.getPoints(), team1.getPoints());
+    public Pair<Double, Double> calculateExpectedWins(double team1_points, double team2_points){
+        double drTeam1 = calcRatingDifference(team1_points, team2_points);
+        double drTeam2 = calcRatingDifference(team2_points, team1_points);
 
         double team1ExpectedWin = calcTeamExpectedWin(drTeam1);
         double team2ExpectedWin = calcTeamExpectedWin(drTeam2);
