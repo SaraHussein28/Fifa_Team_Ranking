@@ -6,23 +6,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class HelloController {
 
     ObservableList <String> listOfTeams = FXCollections.observableArrayList("Egypt", "Italy", "England");
     ObservableList <String> listOfRounds = FXCollections.observableArrayList("Group Stage","Round of 16", "Quarter-finals", "Semi-finals", "Final");
     ObservableList <String> listOfCategories = FXCollections.observableArrayList("Friendly match", "Nations League", "Qualifier for Confederation final competition", "Qualifier for World Cup", "Confederation final competition", "Confederations Cup", "World Cup");
-    ObservableList <String> YesOrNo = FXCollections.observableArrayList("Yes", "No");
 
-    @FXML
-    private Label round_text;
     @FXML
     private Button showFIFARankingBtn;
     @FXML
@@ -36,13 +32,18 @@ public class HelloController {
     @FXML
     private ChoiceBox category_choice_box;
     @FXML
-    private ChoiceBox shootout_choice_box;
+    private CheckBox calender_check_box;
+
+    @FXML
+    private DatePicker date_picker;
+
     @FXML
     protected void initialize(){
-        initializeChoiceBoxes();
+
+        initializeInputValues();
     }
 
-    private void initializeChoiceBoxes() {
+    private void initializeInputValues() {
 
 
         team1_choice_box.setValue("Egypt");
@@ -52,26 +53,26 @@ public class HelloController {
         team2_choice_box.setValue("England");
         team2_choice_box.setItems(listOfTeams);
 
-        round_choice_box.setItems(YesOrNo);
+        round_choice_box.setValue("Group Stage");
+        round_choice_box.setItems(listOfRounds);
 
 
         category_choice_box.setValue("Friendly match");
         category_choice_box.setItems(listOfCategories);
 
-        shootout_choice_box.setItems(YesOrNo);
-
+        date_picker.setValue(LocalDate.now());
     }
 
     @FXML
     protected void onCategoryDragDone(){
         if (category_choice_box.getValue().equals("Friendly match")){
-            round_text.setText("Within international match calendar?");
-            round_choice_box.setItems(YesOrNo);
+            calender_check_box.setDisable(false);
+            round_choice_box.setDisable(true);
         }
         else {
-            round_text.setText("Round");
-            round_choice_box.setItems(listOfRounds);
-
+            round_choice_box.setDisable(false);
+            calender_check_box.setSelected(false);
+            calender_check_box.setDisable(true);
         }
 
     }
