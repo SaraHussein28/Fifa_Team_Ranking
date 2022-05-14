@@ -30,8 +30,6 @@ public class Match {
         }
         team1.calculateNewPoints(importance,wins.getKey(),expectedWins.getKey(), immunity);
         team2.calculateNewPoints(importance,wins.getValue(),expectedWins.getValue(),immunity);
-
-
     }
     public int calcImportance(Categories competitionType, Rounds round,Boolean inCalendar){
         int Importance;
