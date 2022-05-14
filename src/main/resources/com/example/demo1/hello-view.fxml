@@ -76,7 +76,7 @@
                      <Font name="Book Antiqua Bold" size="18.0" />
                   </font>
                </Label>
-               <ChoiceBox fx:id="category_choice_box" layoutX="371.0" layoutY="70.0" onAction="#onCategoryDragDone" prefHeight="26.0" prefWidth="183.0" />
+               <ChoiceBox fx:id="category_choice_box" layoutX="371.0" layoutY="70.0" onAction="#onCategoryDragDone" prefHeight="26.0" prefWidth="246.0" />
                <Label fx:id="round_text" alignment="TOP_LEFT" layoutY="221.0" prefHeight="19.0" prefWidth="360.0" text="Within international match calendar?" textFill="WHITE">
                   <padding>
                      <Insets left="50.0" />
@@ -93,8 +93,8 @@
                      <Font name="Book Antiqua Bold" size="18.0" />
                   </font>
                </Label>
-               <ChoiceBox fx:id="round_choice_box" layoutX="371.0" layoutY="107.0" prefHeight="26.0" prefWidth="183.0" />
-               <DatePicker fx:id="date_picker" layoutX="371.0" layoutY="141.0" prefHeight="26.0" prefWidth="183.0" />
+               <ChoiceBox fx:id="round_choice_box" layoutX="371.0" layoutY="107.0" prefHeight="26.0" prefWidth="246.0" />
+               <DatePicker fx:id="date_picker" layoutX="371.0" layoutY="141.0" prefHeight="26.0" prefWidth="246.0" />
                <Label fx:id="welcomeText111" alignment="TOP_LEFT" layoutY="109.0" prefHeight="23.0" prefWidth="303.0" text="Round" textFill="WHITE">
                   <padding>
                      <Insets left="50.0" />
@@ -112,7 +112,13 @@
                   </font>
                </Label>
                <CheckBox fx:id="calender_check_box" layoutX="371.0" layoutY="225.0" mnemonicParsing="false" />
-               <CheckBox fx:id="shootout_check_box" layoutX="371.0" layoutY="185.0" mnemonicParsing="false" />
+               <CheckBox fx:id="shootout_check_box" layoutX="371.0" layoutY="185.0" mnemonicParsing="false" onAction="#OnShootoutSelected" />
+               <ChoiceBox fx:id="winner_choice_box" layoutX="540.0" layoutY="180.0" prefHeight="26.0" prefWidth="73.0" />
+               <Label fx:id="choose_winner_txt" alignment="TOP_LEFT" layoutX="400.0" layoutY="182.0" text="Choose winner" textFill="WHITE">
+                  <font>
+                     <Font name="Book Antiqua Bold" size="18.0" />
+                  </font>
+               </Label>
             </children>
          </AnchorPane>
          <HBox alignment="CENTER" prefHeight="22.0" prefWidth="446.0" />
