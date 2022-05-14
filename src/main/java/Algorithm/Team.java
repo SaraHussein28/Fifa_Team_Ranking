@@ -4,11 +4,13 @@ public class Team {
     private String name;
     private double points;
     private int rank;
+    private int id;
 
-    public Team(String name, double points, int rank){
+    public Team(String name, double points, int rank, int id){
         this.name = name;
         this.points = points;
         this.rank = rank;
+        this.id = id;
 
     }
 
@@ -36,9 +38,9 @@ public class Team {
         this.rank = rank;
     }
 
-    public void calculateNewPoints(int importance, double win, double expectedWin, Boolean knockOutRounds){
+    public void calculateNewPoints(int importance, double win, double expectedWin, Boolean immunity){
         double winDiff = calcWinDiff(win, expectedWin);
-        if (knockOutRounds == true){
+        if (immunity == true){
             if (win - expectedWin >= 0 ){
                 this.setPoints(this.points + importance * winDiff);
             }
@@ -50,5 +52,13 @@ public class Team {
     }
     public double calcWinDiff(double win, double expectedWin){
         return win - expectedWin;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

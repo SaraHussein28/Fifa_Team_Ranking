@@ -12,6 +12,7 @@ public class Match {
     private Categories competitionType;
     private Rounds round;
     private Boolean PSO;
+    private Team PSOWinningTeam;
 
 
     public Match(Team team1, Team team2, Categories competitionType, Rounds round,
@@ -85,18 +86,24 @@ public class Match {
 
     public Pair<Double, Double> calculateWins(int team1Score, int team2Score,boolean PSO){
         if (team1Score > team2Score){                       //this function needs to be modified Todo
-            if (PSO){
-                return new Pair<>(0.75, 0.5);
-            }
             return new Pair<>(1.0, 0.0);
         }
         else if (team1Score < team2Score) {
-            if (PSO){
-                return new Pair<>(0.5, 0.75);
-            }
+
             return new Pair<>(0.0, 1.0);
         }
-        return new Pair<>(0.5, 0.5);
+        else {
+            if (PSO) {
+                if (PSOWinningTeam.getId() == team1.getId())
+                    return new Pair<>(0.75, 0.5);
+                if (PSOWinningTeam.getId() == team2.getId())
+                    return new Pair<>(0.5, 0.75);
+            }
+            else{
+                return new Pair<>(0.5, 0.5);
+            }
+        }
+        return new Pair<>(0.0, 0.0);
     }
     public boolean calcImmunity(Categories competitionType, Rounds round){
         if(round == Rounds.Group_Stage)return false;
