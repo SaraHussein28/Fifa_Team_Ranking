@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class HelloController {
 
     ObservableList <String> listOfTeams = FXCollections.observableArrayList("Egypt", "Italy", "England");
+    ObservableList <String> teams = FXCollections.observableArrayList("Team 1", "Team 2");
     ObservableList <String> listOfRounds = FXCollections.observableArrayList("Group Stage","Round of 16", "Quarter-finals", "Semi-finals", "Final");
     ObservableList <String> listOfCategories = FXCollections.observableArrayList("Friendly match", "Nations League", "Qualifier for Confederation final competition", "Qualifier for World Cup", "Confederation final competition", "Confederations Cup", "World Cup");
 
@@ -33,7 +34,14 @@ public class HelloController {
     private ChoiceBox category_choice_box;
     @FXML
     private CheckBox calender_check_box;
+    @FXML
+    private CheckBox shootout_check_box;
 
+    @FXML
+    private Label choose_winner_txt;
+
+    @FXML
+    private ChoiceBox winner_choice_box;
     @FXML
     private DatePicker date_picker;
 
@@ -59,6 +67,11 @@ public class HelloController {
 
         category_choice_box.setValue("Friendly match");
         category_choice_box.setItems(listOfCategories);
+
+        winner_choice_box.setValue("Team 1");
+        winner_choice_box.setItems(teams);
+        choose_winner_txt.setVisible(false);
+        winner_choice_box.setVisible(false);
 
         date_picker.setValue(LocalDate.now());
     }
@@ -87,6 +100,19 @@ public class HelloController {
         primaryStage.initModality(Modality.WINDOW_MODAL);
         primaryStage.initOwner(addMatchBtn.getScene().getWindow());
         primaryStage.show();
+    }
+
+    @FXML
+    protected void OnShootoutSelected (){
+        if (shootout_check_box.isSelected()){
+            choose_winner_txt.setVisible(true);
+            winner_choice_box.setVisible(true);
+        }
+        else {
+            choose_winner_txt.setVisible(false);
+            winner_choice_box.setVisible(false);
+        }
+
     }
 
     @FXML
