@@ -17,11 +17,11 @@ class MatchTest {
     Team team1,team2;
     Match match;
     @BeforeEach
-    void setup(){
+    /*void setup(){
         team1=new Team("Egypt",1500,5);
         team2=new Team("England",1600,2);
         match=new Match(team1,team1, Match.Categories.World_Cup, Match.Rounds.Final,3,2,1,false,true);
-    }
+    }*/
 
     //TODO should I test the constructor?
 

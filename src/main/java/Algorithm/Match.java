@@ -1,6 +1,7 @@
 package Algorithm;
 
 import javafx.util.Pair;
+import MySQL.MySQL_Connector;
 
 public class Match {
     int id;
