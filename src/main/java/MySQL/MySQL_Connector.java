@@ -12,7 +12,9 @@ public class MySQL_Connector {
     public static Connection ConnectDB(){
 
         try {
+            // load db driver
             Class.forName("com.mysql.cj.jdbc.Driver");
+            //establish db connection
             return DriverManager.getConnection(db_url, db_username, db_password);
         } catch (Exception e) {
             return null;

@@ -1,7 +1,9 @@
 package Algorithm;
 
 import javafx.util.Pair;
-import MySQL.MySQL_Connector;
+import MySQL.*;
+import java.sql.*;
+import java.util.Objects;
 
 public class Match {
     int id;
@@ -14,12 +16,15 @@ public class Match {
     private Rounds round;
     private Boolean PSO;
     private Team PSOWinningTeam;
+    private int team1score,team2score;
 
 
     public Match(Team team1, Team team2, Categories competitionType, Rounds round,
                  int team1Score, int team2Score, int importance, Boolean PSO,Boolean inCalendar) {
         this.team1 = team1;
         this.team2 = team2;
+        this.team1score = team1Score;
+        this.team2score = team2Score;
         this.competitionType = competitionType;
         this.round = round;
         this.PSO = PSO;
@@ -113,6 +118,22 @@ public class Match {
         }else{
             return false;
         }
+    }
+
+    public void addMatch() throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement
+                ("INSERT INTO Matches(Team1, Team2, Importance, Competition_type, Round, Team1_Score, Team2_Score, PSO)" +
+                " VALUES(?, ?, ?,?,?,?,?,?)");
+        pstmt.setString(1, this.team1.getName());
+        pstmt.setString(2, this.team2.getName());
+        pstmt.setInt(3, this.importance);
+        pstmt.setString(4, String.valueOf(this.competitionType));
+        pstmt.setString(5, String.valueOf(this.round));
+        pstmt.setInt(6, team1score);
+        pstmt.setInt(7, team2score);
+        pstmt.setBoolean(8, this.PSO);
+        pstmt.execute();
     }
 
     public Team getTeam1() {

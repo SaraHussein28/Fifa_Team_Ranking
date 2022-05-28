@@ -11,11 +11,10 @@ public class Team {
     private int rank;
     private int id;
 
-    public Team(String name, double points, int rank, int id){
+    public Team(String name, double points, int rank){
         this.name = name;
         this.points = points;
         this.rank = rank;
-        this.id = id;
 
     }
 
@@ -81,6 +80,6 @@ public class Team {
 
             System.out.println("Team Name : " + name + " , Score = " + score + " , Rank = " + rank);
         }
-
     }
+
 }
