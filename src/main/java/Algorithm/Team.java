@@ -1,5 +1,10 @@
 package Algorithm;
 
+import MySQL.*;
+
+import java.sql.*;
+import java.util.Objects;
+
 public class Team {
     private String name;
     private double points;
@@ -60,5 +65,22 @@ public class Team {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    // to retrieve teams from db and create teams objects for each team
+    // needs to be modified to create team objects and store them (e.g. in an array of Teams)
+    public static void GetAllTeams() throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        Statement stmt = Objects.requireNonNull(conn).createStatement();
+        ResultSet rs = stmt.executeQuery("select * from Teams");
+
+        while (rs.next()){
+            String name = rs.getString("Name");
+            double score = rs.getDouble("Score");
+            int rank = rs.getInt("Rank");
+
+            System.out.println("Team Name : " + name + " , Score = " + score + " , Rank = " + rank);
+        }
+
     }
 }
