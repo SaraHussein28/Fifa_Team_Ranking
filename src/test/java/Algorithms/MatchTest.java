@@ -17,11 +17,11 @@ class MatchTest {
     Team team1,team2;
     Match match;
     @BeforeEach
-    /*void setup(){
+    void setup(){
         team1=new Team("Egypt",1500,5);
         team2=new Team("England",1600,2);
         match=new Match(team1,team1, Match.Categories.World_Cup, Match.Rounds.Final,3,2,1,false,true);
-    }*/
+    }
 
     //TODO should I test the constructor?
 
@@ -117,7 +117,10 @@ class MatchTest {
 
     @Test
     void calcRatingDifference() {
-        //Todo
+        double difference = match.calcRatingDifference(2000,1500.5);
+        assertEquals(499.5,difference);
+        difference = match.calcRatingDifference(500,640);
+        assertEquals(-140,difference);
     }
 
     @Test
@@ -125,10 +128,21 @@ class MatchTest {
         //Todo
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("calcImmunity_arguments")
     void calcImmunity(Match.Categories competition_type, Match.Rounds round,boolean expected){
         boolean result = match.calcImmunity(competition_type,round);
         assertEquals(expected,result);
+    }
+    private static Stream<Arguments> calcImmunity_arguments(){
+        return Stream.of(
+                // Format: competition type, round, expected
+                Arguments.of(Match.Categories.World_Cup,Match.Rounds.Group_Stage,false),
+                Arguments.of(Match.Categories.Friendly_Match,Match.Rounds.Round_of_16,false),
+                Arguments.of(Match.Categories.Confederations_Cup,Match.Rounds.Quarter_Final,true),
+                Arguments.of(Match.Categories.Confederation_Final,Match.Rounds.Final,true),
+                Arguments.of(Match.Categories.World_Cup,Match.Rounds.Semi_Final,true)
+        );
     }
 
 }
