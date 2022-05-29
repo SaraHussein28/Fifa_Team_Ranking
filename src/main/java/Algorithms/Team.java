@@ -1,6 +1,6 @@
 package Algorithms;
 
-import MySQL.*;
+import Database.*;
 
 import java.sql.*;
 import java.util.Objects;

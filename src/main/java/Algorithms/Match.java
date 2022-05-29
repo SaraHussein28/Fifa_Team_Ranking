@@ -1,7 +1,7 @@
 package Algorithms;
 
 import javafx.util.Pair;
-import MySQL.*;
+import Database.*;
 import java.sql.*;
 import java.util.Objects;
 
