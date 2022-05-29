@@ -1,4 +1,4 @@
-package Algorithm;
+package Algorithms;
 
 import javafx.util.Pair;
 import org.junit.jupiter.api.BeforeEach;
