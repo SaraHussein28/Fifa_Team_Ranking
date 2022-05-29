@@ -1,4 +1,4 @@
-package Algorithm;
+package Algorithms;
 
 import javafx.util.Pair;
 import MySQL.*;
@@ -268,5 +268,4 @@ public class Match {
         }
 
     }
-    //String r = Round.Final.label;
 }

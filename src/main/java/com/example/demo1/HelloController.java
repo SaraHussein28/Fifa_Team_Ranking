@@ -41,6 +41,11 @@ public class HelloController {
     private Label choose_winner_txt;
 
     @FXML
+    private Label score_team1;
+
+    @FXML
+    private Label score_team2;
+    @FXML
     private ChoiceBox winner_choice_box;
     @FXML
     private DatePicker date_picker;
