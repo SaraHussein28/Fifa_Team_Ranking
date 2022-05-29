@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import util.ViewUtil;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -16,7 +17,9 @@ import java.time.LocalDate;
 public class HelloController {
 
     ObservableList <String> listOfTeams = FXCollections.observableArrayList("Egypt", "Italy", "England");
-    ObservableList <String> teams = FXCollections.observableArrayList("Team 1", "Team 2");
+    ObservableList <String> listOfTeams2 = FXCollections.observableArrayList("egypt", "italy", "england");
+
+    ObservableList <String> teams = FXCollections.observableArrayList("team 1", "team 2");
     ObservableList <String> listOfRounds = FXCollections.observableArrayList("Group Stage","Round of 16", "Quarter-finals", "Semi-finals", "Final");
     ObservableList <String> listOfCategories = FXCollections.observableArrayList("Friendly match", "Nations League", "Qualifier for Confederation final competition", "Qualifier for World Cup", "Confederation final competition", "Confederations Cup", "World Cup");
 
@@ -41,10 +44,10 @@ public class HelloController {
     private Label choose_winner_txt;
 
     @FXML
-    private Label score_team1;
+    private TextField score_team_one;
 
     @FXML
-    private Label score_team2;
+    private TextField score_team_two;
     @FXML
     private ChoiceBox winner_choice_box;
     @FXML
@@ -63,8 +66,8 @@ public class HelloController {
         team1_choice_box.setItems(listOfTeams);
 
 
-        team2_choice_box.setValue("England");
-        team2_choice_box.setItems(listOfTeams);
+        team2_choice_box.setValue("england");
+        team2_choice_box.setItems(listOfTeams2);
 
         round_choice_box.setValue("Group Stage");
         round_choice_box.setItems(listOfRounds);
@@ -73,7 +76,7 @@ public class HelloController {
         category_choice_box.setValue("Friendly match");
         category_choice_box.setItems(listOfCategories);
 
-        winner_choice_box.setValue("Team 1");
+        winner_choice_box.setValue("team 1");
         winner_choice_box.setItems(teams);
         choose_winner_txt.setVisible(false);
         winner_choice_box.setVisible(false);
@@ -95,9 +98,10 @@ public class HelloController {
 
     }
     @FXML
-    protected void onAddMatchButtonClick() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("popupWindow.fxml"));
+    protected void onAddMatchButtonClick(){
 
+        /*
+        Parent root = FXMLLoader.load(getClass().getResource("popupWindow.fxml"));
         Scene scene = new Scene(root);
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Match is added");
@@ -105,7 +109,23 @@ public class HelloController {
         primaryStage.initModality(Modality.WINDOW_MODAL);
         primaryStage.initOwner(addMatchBtn.getScene().getWindow());
         primaryStage.show();
+*/
+        String team1 = team1_choice_box.getValue().toString().toLowerCase();
+        String team2 = team2_choice_box.getValue().toString().toLowerCase();
+
+        if (team1.equals(team2)){
+            ViewUtil.createAlert(Alert.AlertType.ERROR, "The two teams should be different").showAndWait();
+
+        }
+        else if (score_team_one.getText().isEmpty()  || score_team_two.getText().isEmpty()){
+           ViewUtil.createAlert(Alert.AlertType.ERROR, "Please enter all the fields").showAndWait();
+       }
+        else{
+           ViewUtil.createAlert(Alert.AlertType.INFORMATION, "Match is added").showAndWait();
+
+       }
     }
+
 
     @FXML
     protected void OnShootoutSelected (){
