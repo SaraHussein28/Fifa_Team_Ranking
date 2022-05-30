@@ -27,6 +27,8 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
+import java.io.IOException;
+
 public class HelloApplicationTest extends ApplicationTest {
 
     Team England = new Team("England",0 ,0);
@@ -209,6 +211,11 @@ public class HelloApplicationTest extends ApplicationTest {
     }
 
 
+// hwo to switch between scenes in testFX
+    @Test
+    public void testCase9() throws IOException {
+        clickOn("#showFIFARankingBtn");
+    }
 
 }
 
