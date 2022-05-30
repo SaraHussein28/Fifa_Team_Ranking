@@ -18,9 +18,9 @@
 <VBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
    <children>
       <VBox id="VBox" alignment="CENTER" onMouseDragEntered="#onCategoryDragDone" prefHeight="700.0" prefWidth="700.0" spacing="20.0" styleClass="bodybg" stylesheets="@background.css">
-          <padding>
-              <Insets bottom="20.0" left="45.0" right="20.0" top="20.0" />
-          </padding>
+         <padding>
+            <Insets bottom="20.0" left="45.0" right="20.0" top="20.0" />
+         </padding>
          <Label fx:id="welcomeText2" alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="417.0" text="FIFA Team Ranking" textAlignment="JUSTIFY" textFill="WHITE">
             <font>
                <Font name="Bodoni MT Bold" size="43.0" />
@@ -35,9 +35,9 @@
                   </image>
                </ImageView>
                <VBox alignment="CENTER" layoutX="264.0" layoutY="12.0" />
-               <ChoiceBox fx:id="team1_choice_box" layoutX="52.0" layoutY="47.0" prefHeight="26.0" prefWidth="121.0" />
-            
-                                  <Label fx:id="welcomeText" contentDisplay="CENTER" layoutX="26.0" layoutY="5.0" prefHeight="31.0" prefWidth="160.0" text="         Team 1 " textAlignment="CENTER" textFill="WHITE">
+               <ChoiceBox fx:id="team1_choice_box" layoutX="52.0" layoutY="47.0" onAction="#updateSelectedTeams" prefHeight="26.0" prefWidth="121.0" />
+
+               <Label fx:id="welcomeText" contentDisplay="CENTER" layoutX="26.0" layoutY="5.0" prefHeight="31.0" prefWidth="160.0" text="         Team 1 " textAlignment="CENTER" textFill="WHITE">
                   <font>
                      <Font name="Bodoni MT Bold" size="26.0" />
                   </font>
@@ -47,7 +47,7 @@
                      <Font name="Bodoni MT Bold" size="26.0" />
                   </font>
                </Label>
-               <ChoiceBox fx:id="team2_choice_box" layoutX="458.0" layoutY="47.0" prefHeight="26.0" prefWidth="121.0" />
+               <ChoiceBox fx:id="team2_choice_box" layoutX="458.0" layoutY="47.0" onAction="#updateSelectedTeams" prefHeight="26.0" prefWidth="121.0" />
                <Label fx:id="welcomeText1111" alignment="CENTER" layoutX="264.0" layoutY="115.0" prefHeight="18.0" prefWidth="108.0" text="Score" textAlignment="CENTER" textFill="WHITE">
                   <font>
                      <Font name="System Bold" size="21.0" />
@@ -122,7 +122,7 @@
             </children>
          </AnchorPane>
          <HBox alignment="CENTER" prefHeight="22.0" prefWidth="446.0" />
-          <Button fx:id="addMatchBtn" onAction="#onAddMatchButtonClick" prefWidth="150.0" text="Add Match">
+         <Button fx:id="addMatchBtn" onAction="#onAddMatchButtonClick" prefWidth="150.0" text="Add Match">
             <font>
                <Font size="15.0" />
             </font>
