@@ -1,11 +1,16 @@
 package Algorithms;
 
 import Database.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Objects;
 
 public class Team {
+
+    public static ObservableList<Team> teams_list = FXCollections.observableArrayList();
     private String name;
     private double points;
     private int rank;
@@ -66,6 +71,19 @@ public class Team {
         this.id = id;
     }
 
+    @Override
+    public String toString(){
+        return this.name;
+    }
+
+    @Override
+    public boolean equals(Object team){
+        //team = (Team)team;
+        if (team == null)return false;
+        if (this.name.equals(((Team) team).getName()))return true;
+        return false;
+    }
+
     // to retrieve teams from db and create teams objects for each team
     // needs to be modified to create team objects and store them (e.g. in an array of Teams)
     public static void GetAllTeams() throws SQLException {
@@ -77,7 +95,7 @@ public class Team {
             String name = rs.getString("Name");
             double score = rs.getDouble("Score");
             int rank = rs.getInt("Rank");
-
+            teams_list.add(new Team(name,score,rank));
             System.out.println("Team Name : " + name + " , Score = " + score + " , Rank = " + rank);
         }
     }
