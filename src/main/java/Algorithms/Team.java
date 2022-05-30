@@ -90,7 +90,7 @@ public class Team {
         Connection conn = MySQL_Connector.ConnectDB();
         Statement stmt = Objects.requireNonNull(conn).createStatement();
         ResultSet rs = stmt.executeQuery("select * from Teams");
-
+        teams_list.clear();
         while (rs.next()){
             String name = rs.getString("Name");
             double score = rs.getDouble("Score");
