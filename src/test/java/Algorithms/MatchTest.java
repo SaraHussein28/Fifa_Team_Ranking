@@ -20,7 +20,9 @@ class MatchTest {
     void setup(){
         team1=new Team("Egypt",1500,5);
         team2=new Team("England",1600,2);
-        match=new Match(team1,team1, Match.Categories.World_Cup, Match.Rounds.Final,3,2,1,false,true);
+        match=new Match(team1,team1, Match.Categories.World_Cup, Match.Rounds.Final,3,
+                2,1,false,true,null);//Todo check this
+
     }
 
     //TODO should I test the constructor?
