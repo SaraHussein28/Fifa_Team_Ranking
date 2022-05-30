@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import util.ViewUtil;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -46,10 +47,10 @@ public class HelloController {
     private Label choose_winner_txt;
 
     @FXML
-    private Label score_team1;
+    private TextField score_team_one;
 
     @FXML
-    private Label score_team2;
+    private TextField score_team_two;
     @FXML
     private ChoiceBox winner_choice_box;
     @FXML
@@ -118,9 +119,9 @@ public class HelloController {
         winner_choice_box.setValue(selectedTeams.get(0));
     }
     @FXML
-    protected void onAddMatchButtonClick() throws IOException {
+    protected void onAddMatchButtonClick(){
+        /*
         Parent root = FXMLLoader.load(getClass().getResource("popupWindow.fxml"));
-
         Scene scene = new Scene(root);
         Stage primaryStage = new Stage();
         primaryStage.setTitle("Match is added");
@@ -128,6 +129,18 @@ public class HelloController {
         primaryStage.initModality(Modality.WINDOW_MODAL);
         primaryStage.initOwner(addMatchBtn.getScene().getWindow());
         primaryStage.show();
+        */
+        String team1 = team1_choice_box.getValue().toString().toLowerCase();
+        String team2 = team2_choice_box.getValue().toString().toLowerCase();
+        if (team1.equals(team2)){
+            ViewUtil.createAlert(Alert.AlertType.ERROR, "The two teams should be different").showAndWait();
+        }
+        else if (score_team_one.getText().isEmpty() || score_team_two.getText().isEmpty()){
+            ViewUtil.createAlert(Alert.AlertType.ERROR, "Please enter all the fields").showAndWait();
+        }
+        else{
+            ViewUtil.createAlert(Alert.AlertType.INFORMATION, "Match is added").showAndWait();
+        }
     }
 
     @FXML
