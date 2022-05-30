@@ -32,11 +32,13 @@ class TeamTest {
                 // Format: importance, win, expectedWin, immunity, expected new points
 
                 //Tests with immunity, the points shouldn't decrease if the win is less than the expected win
+                //if any of those fail, then the immunity condition in the function is wrong
                 Arguments.of(10,0,0.7,true,points),
                 Arguments.of(10,0.5,0.8,true,points),
                 Arguments.of(10,0,0.7,true,points),
                 Arguments.of(10,1,0.7,true,1503.5),
-                //Tests without immunity
+
+                //Tests without immunity if the win value is smaller than the expected with the points should decrease
                 Arguments.of(10,1,0.7,false,1503.5),
                 Arguments.of(10,0,0.7,false,1493.5),
                 Arguments.of(10,0.5,0.8,false,1497.5)
