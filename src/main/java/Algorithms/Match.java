@@ -20,7 +20,7 @@ public class Match {
 
 
     public Match(Team team1, Team team2, Categories competitionType, Rounds round,
-                 int team1Score, int team2Score, int importance, Boolean PSO,Boolean inCalendar) {
+                 int team1Score, int team2Score, int importance, Boolean PSO,Boolean inCalendar, Team PSOWinningTeam) {
         this.team1 = team1;
         this.team2 = team2;
         this.team1score = team1Score;
@@ -29,7 +29,8 @@ public class Match {
         this.round = round;
         this.PSO = PSO;
         this.importance = calcImportance(competitionType, round, inCalendar);
-        wins = calculateWins(team1Score, team2Score,PSO);
+        this.PSOWinningTeam=PSOWinningTeam;
+        wins = calculateWins(team1Score, team2Score,PSO,PSOWinningTeam);
         expectedWins = calculateExpectedWins(team1.getPoints(),team2.getPoints());
         Boolean immunity = calcImmunity(competitionType,round);         //true if a match is in the knockout stages of a final competition
         if (this.round != Rounds.Group_Stage){
@@ -90,8 +91,8 @@ public class Match {
         return (team1Points - team2Points);
     }
 
-    public Pair<Double, Double> calculateWins(int team1Score, int team2Score,boolean PSO){
-        if (team1Score > team2Score){                       //this function needs to be modified Todo
+    public Pair<Double, Double> calculateWins(int team1Score, int team2Score,boolean PSO, Team PSOWinner){
+        if (team1Score > team2Score){
             return new Pair<>(1.0, 0.0);
         }
         else if (team1Score < team2Score) {
@@ -100,9 +101,9 @@ public class Match {
         }
         else {
             if (PSO) {
-                if (PSOWinningTeam.getId() == team1.getId())
+                if (PSOWinner.getId() == team1.getId())
                     return new Pair<>(0.75, 0.5);
-                if (PSOWinningTeam.getId() == team2.getId())
+                if (PSOWinner.getId() == team2.getId())
                     return new Pair<>(0.5, 0.75);
             }
             else{
@@ -124,7 +125,7 @@ public class Match {
         Connection conn = MySQL_Connector.ConnectDB();
         PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement
                 ("INSERT INTO Matches(Team1, Team2, Importance, Competition_type, Round, Team1_Score, Team2_Score, PSO)" +
-                " VALUES(?, ?, ?,?,?,?,?,?)");
+                        " VALUES(?, ?, ?,?,?,?,?,?)");
         pstmt.setString(1, this.team1.getName());
         pstmt.setString(2, this.team2.getName());
         pstmt.setInt(3, this.importance);
