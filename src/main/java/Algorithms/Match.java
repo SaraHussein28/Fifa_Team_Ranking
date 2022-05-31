@@ -113,9 +113,9 @@ public class Match {
         }
         else {
             if (PSO) {
-                if (PSOWinner.getId() == team1.getId())
+                if (this.team1.equals(PSOWinner))
                     return new Pair<>(0.75, 0.5);
-                if (PSOWinner.getId() == team2.getId())
+                if (this.team2.equals(PSOWinner))
                     return new Pair<>(0.5, 0.75);
             }
             else{
@@ -124,6 +124,7 @@ public class Match {
         }
         return new Pair<>(0.0, 0.0);
     }
+
     public boolean calcImmunity(Categories competitionType, Rounds round){
         if(round == Rounds.Group_Stage)return false;
         if(competitionType==Categories.Confederation_Final||competitionType==Categories.Confederations_Cup||competitionType==Categories.World_Cup){
