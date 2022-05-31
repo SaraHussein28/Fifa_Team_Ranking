@@ -17,14 +17,18 @@ public class Match {
     private Boolean PSO;
     private Team PSOWinningTeam;
     private int team1score,team2score;
+    private int month, year;
 
 
     public Match(Team team1, Team team2, Categories competitionType, Rounds round,
-                 int team1Score, int team2Score, int importance, Boolean PSO,Boolean inCalendar, Team PSOWinningTeam) {
+                 int team1Score, int team2Score, int importance, Boolean PSO,Boolean inCalendar, Team PSOWinningTeam
+                 ,int month, int year) {
         this.team1 = team1;
         this.team2 = team2;
         this.team1score = team1Score;
         this.team2score = team2Score;
+        this.month = month;
+        this.year = year;
         this.competitionType = competitionType;
         this.round = round;
         this.PSO = PSO;
@@ -172,6 +176,44 @@ public class Match {
 
     }
 
+    // this method should be called each time a match is added
+    // BUT before, updateId method should be called on the match
+    //also the score of each of the 2 team objects should be updates so that updated scores
+    //according to this match are added to the history.
+    public void addMatchToHistory() throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                "INSERT INTO score_history VALUES(?,?,?,?,?)");
+        PreparedStatement pstmt2 = Objects.requireNonNull(conn).prepareStatement(
+                "INSERT INTO score_history VALUES(?,?,?,?,?)");
+        pstmt.setString(1, this.team1.getName());
+        pstmt.setInt(2, this.getId());
+        pstmt.setInt(3, this.getMonth());
+        pstmt.setInt(4, this.getYear());
+        //team1 points should be updated before calling this method to insert updated score to the history
+        pstmt.setDouble(5, this.team1.getPoints());
+
+        pstmt2.setString(1, this.team2.getName());
+        pstmt2.setInt(2, this.getId());
+        pstmt2.setInt(3, this.getMonth());
+        pstmt2.setInt(4, this.getYear());
+        //team1 points should be updated before calling this method to insert updated score to the history
+        pstmt.setDouble(5, this.team2.getPoints());
+
+        pstmt.execute();
+        pstmt2.execute();
+    }
+
+    public void updateID() throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        //get last added match
+        Statement stmt = Objects.requireNonNull(conn).createStatement();
+        ResultSet rs = stmt.executeQuery("select * from Matches order by ID desc limit 1");
+        rs.next();
+
+        this.id = rs.getInt("Id");
+    }
+
     public Team getTeam1() {
         return team1;
     }
@@ -206,6 +248,14 @@ public class Match {
 
     public int getImportance() {
         return importance;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getYear() {
+        return year;
     }
 
     public void setImportance(int importance) {

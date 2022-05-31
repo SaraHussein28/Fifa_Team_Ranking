@@ -21,7 +21,7 @@ class MatchTest {
         team1=new Team("Egypt",1500,5);
         team2=new Team("England",1600,2);
         match=new Match(team1,team1, Match.Categories.World_Cup, Match.Rounds.Final,3,
-                2,1,false,true,null);//Todo check this
+                2,1,false,true,null,1,2001);//Todo check this
 
     }
 
