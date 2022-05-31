@@ -2,7 +2,6 @@ package Algorithms;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -50,6 +49,9 @@ class TeamTest {
     @DisplayName("Test Win Diff")
     @MethodSource("WinDiff_arguments")
     void calcWinDiff(double win, double expectedWin, double expected_result) {
+        // this test checks if the function indeed the difference between the first and second arguments and nothing
+        // is swapped
+        // the tests also check if the result is indeed a double
         double result = team.calcWinDiff(win,expectedWin);
         assertEquals(expected_result,result,1e-15);
     }
@@ -57,33 +59,31 @@ class TeamTest {
     private static Stream<Arguments> WinDiff_arguments(){
         return Stream.of(
                 // Format: W,We,expected answer
+                // The W argument can only be (0, 0.5, 0.75, 1.0)
+                //Testing W = 0 with a range of different values of We
                 Arguments.of(0.0,0.0,0.0),
                 Arguments.of(0.0,0.25,-0.25),
                 Arguments.of(0.0,0.5,-0.5),
-                Arguments.of(0.0,0.65,-0.65),
                 Arguments.of(0.0,0.75,-0.75),
-                Arguments.of(0.0,0.9,0.-0.9),
                 Arguments.of(0.0,1.0,-1.0),
+                //Testing W = 0.5 with a range of different values of We
                 Arguments.of(0.5,0.0,0.5),
-                Arguments.of(0.5,0.25,0.25),
+                Arguments.of(0.5,0.4,0.1),
                 Arguments.of(0.5,0.5,0.0),
-                Arguments.of(0.5,0.65,-0.15),
-                Arguments.of(0.5,0.75,-0.25),
-                Arguments.of(0.5,0.9,0.-0.4),
+                Arguments.of(0.5,0.63,-0.13),
                 Arguments.of(0.5,1.0,-0.5),
+                //Testing W = 0.75 with a range of different values of We
                 Arguments.of(0.75,0.0,0.75),
-                Arguments.of(0.75,0.25,0.5),
+                Arguments.of(0.75,0.45,0.3),
                 Arguments.of(0.75,0.5,0.25),
-                Arguments.of(0.75,0.65,0.1),
-                Arguments.of(0.75,0.75,0.0),
+                Arguments.of(0.75,0.6,0.15),
                 Arguments.of(0.75,0.9,0.-0.15),
                 Arguments.of(0.75,1.0,-0.25),
+                //Testing W = 1.0 with a range of different values of We
                 Arguments.of(1.0,0.0,1.0),
                 Arguments.of(1.0,0.25,0.75),
                 Arguments.of(1.0,0.5,0.5),
-                Arguments.of(1.0,0.65,0.35),
                 Arguments.of(1.0,0.75,0.25),
-                Arguments.of(1.0,0.9,0.1),
                 Arguments.of(1.0,1.0,0)
         );
     }
