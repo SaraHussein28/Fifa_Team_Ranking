@@ -20,7 +20,7 @@ class TeamTest {
         team = new Team("Egypt",points,3);
     }
     @ParameterizedTest
-    @DisplayName("Test Win Diff")
+    @DisplayName("Test new points calculation")
     @MethodSource("calc_new_points_arguments")
     void calculateNewPoints(int importance,double win, double expectedWin, boolean immunity, double expected) throws SQLException {
         team.calculateNewPoints(importance,win,expectedWin,immunity);
@@ -36,6 +36,10 @@ class TeamTest {
                 Arguments.of(10,0,0.7,true,points),
                 Arguments.of(10,0.5,0.8,true,points),
                 Arguments.of(10,0,0.7,true,points),
+
+                //Tests if immunity affect the points of the team in case they win
+                //if this fails, this indicates that the immunity condition may have been implemented in a way that
+                //prohibits the change of points altogether
                 Arguments.of(10,1,0.7,true,1503.5),
 
                 //Tests without immunity if the win value is smaller than the expected with the points should decrease

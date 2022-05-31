@@ -30,13 +30,13 @@ public class HelloController {
     @FXML
     private Button addMatchBtn;
     @FXML
-    private ChoiceBox team1_choice_box;
+    private ChoiceBox<Team> team1_choice_box;
     @FXML
-    private ChoiceBox team2_choice_box;
+    private ChoiceBox<Team> team2_choice_box;
     @FXML
-    private ChoiceBox round_choice_box;
+    private ChoiceBox<Match.Rounds> round_choice_box;
     @FXML
-    private ChoiceBox category_choice_box;
+    private ChoiceBox<Match.Categories> category_choice_box;
     @FXML
     private CheckBox calender_check_box;
     @FXML
@@ -76,7 +76,7 @@ public class HelloController {
         team2_choice_box.setItems(listOfTeams);
         team2_choice_box.setValue(listOfTeams.get(1));
 
-        round_choice_box.setValue("Group Stage");
+        round_choice_box.setValue(Match.Rounds.Group_Stage);
         round_choice_box.getItems().setAll(Match.Rounds.values());
 
 
@@ -111,8 +111,8 @@ public class HelloController {
     }
     @FXML
     protected void onAddMatchButtonClick() throws SQLException {
-        Team team1 = (Team) team1_choice_box.getValue();
-        Team team2 = (Team) team2_choice_box.getValue();
+        Team team1 = team1_choice_box.getValue();
+        Team team2 = team2_choice_box.getValue();
 
         if (team1.equals(team2)){
             ViewUtil.createAlert(Alert.AlertType.ERROR, "The two teams should be different").showAndWait();
@@ -121,11 +121,11 @@ public class HelloController {
             ViewUtil.createAlert(Alert.AlertType.ERROR, "Please enter all the fields").showAndWait();
         }
         else{
-            Match.Categories category = (Match.Categories) category_choice_box.getValue();
+            Match.Categories category = category_choice_box.getValue();
             Match.Rounds round = null;
             System.out.println(round_choice_box.getValue());
             if (round_choice_box.getValue() != null)
-                round = (Match.Rounds) round_choice_box.getValue();
+                round = round_choice_box.getValue();
 
             int team1Score = parseInt(score_team_one.getText());
             int team2Score = parseInt(score_team_two.getText());
