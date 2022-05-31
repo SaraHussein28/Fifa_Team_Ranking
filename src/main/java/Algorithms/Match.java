@@ -202,7 +202,7 @@ public class Match {
         pstmt2.setInt(3, this.getMonth());
         pstmt2.setInt(4, this.getYear());
         //team1 points should be updated before calling this method to insert updated score to the history
-        pstmt.setDouble(5, this.team2.getPoints());
+        pstmt2.setDouble(5, this.team2.getPoints());
 
         pstmt.execute();
         pstmt2.execute();
