@@ -22,16 +22,13 @@ class MatchTest {
         team1=new Team("Egypt",1500,5);
         team2=new Team("England",1600,2);
         match=new Match(team1,team1, Match.Categories.World_Cup, Match.Rounds.Final,3,
-                2, false,true,null,1,2001);//Todo check this
+                2,false,true,null,1,2001);
 
     }
-
-    //TODO should I test the constructor?
 
     @ParameterizedTest
     @MethodSource("calcImportance_arguments")
     void calcImportance(Match.Categories competitionType, Match.Rounds round, Boolean inCalendar, int expected) {
-        //Todo
         int result = match.calcImportance(competitionType,round,inCalendar);
         assertEquals(expected,result);
     }
@@ -126,7 +123,7 @@ class MatchTest {
     }
     private static Stream<Arguments> TeamExpectedWin_arguments(){
         return Stream.of(
-                // Format: dr, expected answer
+                // Format: points difference, expected answer
 
                 // if both teams have the same points (difference = zero) then the expected win should be 0.5
                 Arguments.of(0,0.5),
@@ -170,11 +167,21 @@ class MatchTest {
         return Stream.of(
                 // Format: competition type, round, expected
 
-                // if this test case fails then the condition for group_stage is wrong
+                // if any of the test cases fail then the condition for group_stage is wrong
+                Arguments.of(Match.Categories.Friendly_Match,Match.Rounds.Group_Stage,false),
+                Arguments.of(Match.Categories.Nations_League,Match.Rounds.Group_Stage,false),
+                Arguments.of(Match.Categories.Q_for_Conf,Match.Rounds.Group_Stage,false),
+                Arguments.of(Match.Categories.Q_for_World_Cup,Match.Rounds.Group_Stage,false),
+                Arguments.of(Match.Categories.Confederation_Final,Match.Rounds.Group_Stage,false),
+                Arguments.of(Match.Categories.Confederations_Cup,Match.Rounds.Group_Stage,false),
                 Arguments.of(Match.Categories.World_Cup,Match.Rounds.Group_Stage,false),
 
-                // if this test case fails then the condition for friendly match is wrong
+                // if any of test cases fails then the condition for friendly match is wrong
+                Arguments.of(Match.Categories.Friendly_Match,Match.Rounds.Group_Stage,false),
                 Arguments.of(Match.Categories.Friendly_Match,Match.Rounds.Round_of_16,false),
+                Arguments.of(Match.Categories.Friendly_Match,Match.Rounds.Quarter_Final,false),
+                Arguments.of(Match.Categories.Friendly_Match,Match.Rounds.Semi_Final,false),
+                Arguments.of(Match.Categories.Friendly_Match,Match.Rounds.Final,false),
 
                 // if any of those test cases fails, then the condition for the round of that test case is wrong
                 Arguments.of(Match.Categories.World_Cup,Match.Rounds.Round_of_16,true),
@@ -182,12 +189,11 @@ class MatchTest {
                 Arguments.of(Match.Categories.World_Cup,Match.Rounds.Semi_Final,true),
                 Arguments.of(Match.Categories.World_Cup,Match.Rounds.Final,true),
 
-
                 // all the competition types mentioned in the remaining test cases are eligible for immunity
                 // if any of those test cases fail, then the condition for that competition is wrong
-                Arguments.of(Match.Categories.Confederations_Cup,Match.Rounds.Quarter_Final,true),
+                Arguments.of(Match.Categories.Confederations_Cup,Match.Rounds.Final,true),
                 Arguments.of(Match.Categories.Confederation_Final,Match.Rounds.Final,true),
-                Arguments.of(Match.Categories.World_Cup,Match.Rounds.Semi_Final,true)
+                Arguments.of(Match.Categories.World_Cup,Match.Rounds.Final,true)
         );
     }
 
