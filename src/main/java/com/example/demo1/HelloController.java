@@ -143,7 +143,8 @@ public class HelloController {
                     PSOWinningTeam, month, year);
 
             newMatch.execDBMethods();
-
+            team1.updatePoints();
+            team2.updatePoints();
             System.out.println("New Match Added Successfully");
             System.out.println(newMatch.getYear() + newMatch.getTeam1().getName() + newMatch.getMonth()
                     + newMatch.getImportance() + newMatch.getTeam2().getName());

@@ -56,7 +56,7 @@ public class Team {
         else{
             this.setPoints(this.points + importance * winDiff);
         }
-        this.updatePoints();
+
     }
     public double calcWinDiff(double win, double expectedWin){
         return win - expectedWin;
