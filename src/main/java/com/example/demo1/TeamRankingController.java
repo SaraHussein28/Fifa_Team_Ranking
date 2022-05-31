@@ -22,7 +22,13 @@ public class TeamRankingController {
     protected void initialize(){
         initializeChoiceBoxes();
     }
-
+/*
+* l kol el teams call getScoreFromHistory
+* sort descendingly according to score
+*
+* rank      name        points
+*
+* */
     private void initializeChoiceBoxes() {
         ObservableList<String> listOfMonths = FXCollections.observableArrayList("April-2022", "March-2022", "February-2022", "January-2022", "December-2021", "November-2021", "October-2021", "September-2021", "August-2021", "July-2021", "June-2021", "May-2021", "April-2021");
 

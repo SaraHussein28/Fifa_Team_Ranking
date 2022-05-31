@@ -17,14 +17,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import static java.lang.Integer.parseInt;
+
 public class HelloController {
 
 
-    ObservableList <Team> listOfTeams;// = FXCollections.observableArrayList("Egypt", "Italy", "England");
-    //ObservableList <String> teams = FXCollections.observableArrayList("Team 1", "Team 2");
+    ObservableList <Team> listOfTeams;
     ObservableList <Team> selectedTeams = FXCollections.observableArrayList();
-    //ObservableList <String> listOfRounds = FXCollections.observableArrayList("Group Stage","Round of 16", "Quarter-finals", "Semi-finals", "Final");
-    //ObservableList <String> listOfCategories = FXCollections.observableArrayList("Friendly match", "Nations League", "Qualifier for Confederation final competition", "Qualifier for World Cup", "Confederation final competition", "Confederations Cup", "World Cup");
 
     @FXML
     private Button showFIFARankingBtn;
@@ -61,7 +60,6 @@ public class HelloController {
 
         try {
             Team.GetAllTeams();
-            //System.out.println(Team.teams_list);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -72,12 +70,9 @@ public class HelloController {
 
     private void initializeInputValues() {
 
-
-        //team1_choice_box.setValue("Egypt");
         team1_choice_box.setItems(listOfTeams);
         team1_choice_box.setValue(listOfTeams.get(0));
 
-        //team2_choice_box.setValue("England");
         team2_choice_box.setItems(listOfTeams);
         team2_choice_box.setValue(listOfTeams.get(1));
 
@@ -88,10 +83,6 @@ public class HelloController {
         category_choice_box.setValue(Match.Categories.Friendly_Match);
         category_choice_box.getItems().setAll(Match.Categories.values());
 
-        //winner_choice_box.setValue("Team 1");
-        //winner_choice_box.setItems(teams);
-        //winner_choice_box.setValue(selectedTeams.get(0));
-        //winner_choice_box.getItems().setAll(selectedTeams);
         choose_winner_txt.setVisible(false);
         winner_choice_box.setVisible(false);
 
@@ -119,19 +110,10 @@ public class HelloController {
         winner_choice_box.setValue(selectedTeams.get(0));
     }
     @FXML
-    protected void onAddMatchButtonClick(){
-        /*
-        Parent root = FXMLLoader.load(getClass().getResource("popupWindow.fxml"));
-        Scene scene = new Scene(root);
-        Stage primaryStage = new Stage();
-        primaryStage.setTitle("Match is added");
-        primaryStage.setScene(scene);
-        primaryStage.initModality(Modality.WINDOW_MODAL);
-        primaryStage.initOwner(addMatchBtn.getScene().getWindow());
-        primaryStage.show();
-        */
-        String team1 = team1_choice_box.getValue().toString().toLowerCase();
-        String team2 = team2_choice_box.getValue().toString().toLowerCase();
+    protected void onAddMatchButtonClick() throws SQLException {
+        Team team1 = (Team) team1_choice_box.getValue();
+        Team team2 = (Team) team2_choice_box.getValue();
+
         if (team1.equals(team2)){
             ViewUtil.createAlert(Alert.AlertType.ERROR, "The two teams should be different").showAndWait();
         }
@@ -139,6 +121,31 @@ public class HelloController {
             ViewUtil.createAlert(Alert.AlertType.ERROR, "Please enter all the fields").showAndWait();
         }
         else{
+            Match.Categories category = (Match.Categories) category_choice_box.getValue();
+            Match.Rounds round = null;
+            System.out.println(round_choice_box.getValue());
+            if (round_choice_box.getValue() != null)
+                round = (Match.Rounds) round_choice_box.getValue();
+
+            int team1Score = parseInt(score_team_one.getText());
+            int team2Score = parseInt(score_team_two.getText());
+            boolean isPSO = shootout_check_box.isSelected();
+            boolean isInCalendar = calender_check_box.isSelected();
+            Team PSOWinningTeam = null;
+            LocalDate date = date_picker.getValue();
+            int month = date.getMonthValue();
+            int year = date.getYear();
+            if (isPSO){
+                PSOWinningTeam = (Team) winner_choice_box.getValue();
+            }
+
+            Match newMatch = new Match(team1, team2,category, round, team1Score, team2Score, isPSO,isInCalendar,
+                    PSOWinningTeam, month, year);
+
+            System.out.println("New Match Added Successfully");
+            System.out.println(newMatch.getYear() + newMatch.getTeam1().getName() + newMatch.getMonth()
+                    + newMatch.getImportance() + newMatch.getTeam2().getName());
+
             ViewUtil.createAlert(Alert.AlertType.INFORMATION, "Match is added").showAndWait();
         }
     }

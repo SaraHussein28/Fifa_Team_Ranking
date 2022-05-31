@@ -21,8 +21,8 @@ public class Match {
 
 
     public Match(Team team1, Team team2, Categories competitionType, Rounds round,
-                 int team1Score, int team2Score, int importance, Boolean PSO,Boolean inCalendar, Team PSOWinningTeam
-                 ,int month, int year) {
+                 int team1Score, int team2Score, boolean PSO,Boolean inCalendar, Team PSOWinningTeam
+                 ,int month, int year) throws SQLException {
         this.team1 = team1;
         this.team2 = team2;
         this.team1score = team1Score;
@@ -40,8 +40,12 @@ public class Match {
         if (this.round != Rounds.Group_Stage){
             immunity = true;
         }
+
         team1.calculateNewPoints(importance,wins.getKey(),expectedWins.getKey(), immunity);
         team2.calculateNewPoints(importance,wins.getValue(),expectedWins.getValue(),immunity);
+        this.addMatch();
+        this.updateID();
+        this.addMatchToHistory();
     }
     public int calcImportance(Categories competitionType, Rounds round,Boolean inCalendar){
         int Importance;

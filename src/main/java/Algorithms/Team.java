@@ -47,7 +47,7 @@ public class Team {
         this.rank = rank;
     }
 
-    public void calculateNewPoints(int importance, double win, double expectedWin, Boolean immunity){
+    public void calculateNewPoints(int importance, double win, double expectedWin, Boolean immunity) throws SQLException {
         double winDiff = calcWinDiff(win, expectedWin);
         if (immunity == true){
             if (win - expectedWin >= 0 ){
@@ -57,7 +57,7 @@ public class Team {
         else{
             this.setPoints(this.points + importance * winDiff);
         }
-
+        this.updatePoints();
     }
     public double calcWinDiff(double win, double expectedWin){
         return win - expectedWin;
@@ -99,10 +99,10 @@ public class Team {
             System.out.println("Team Name : " + name + " , Score = " + score + " , Rank = " + rank);
         }
     }
-    public void updateScore(double newScore) throws SQLException {
+    public void updatePoints() throws SQLException {
         Connection conn = MySQL_Connector.ConnectDB();
         PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement("update Teams set Score = ? where Name = ?");
-        pstmt.setDouble(1, newScore);
+        pstmt.setDouble(1, this.points);
         pstmt.setString(2, this.getName());
 
         pstmt.execute();

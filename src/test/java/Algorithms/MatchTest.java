@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.sql.SQLException;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -17,11 +18,11 @@ class MatchTest {
     Team team1,team2;
     Match match;
     @BeforeEach
-    void setup(){
+    void setup() throws SQLException {
         team1=new Team("Egypt",1500,5);
         team2=new Team("England",1600,2);
         match=new Match(team1,team1, Match.Categories.World_Cup, Match.Rounds.Final,3,
-                2,1,false,true,null,1,2001);//Todo check this
+                2, false,true,null,1,2001);//Todo check this
 
     }
 

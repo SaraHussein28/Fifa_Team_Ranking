@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.sql.SQLException;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +22,7 @@ class TeamTest {
     @ParameterizedTest
     @DisplayName("Test Win Diff")
     @MethodSource("calc_new_points_arguments")
-    void calculateNewPoints(int importance,double win, double expectedWin, boolean immunity, double expected) {
+    void calculateNewPoints(int importance,double win, double expectedWin, boolean immunity, double expected) throws SQLException {
         team.calculateNewPoints(importance,win,expectedWin,immunity);
         assertEquals(expected,team.getPoints());
     }
