@@ -56,8 +56,13 @@ public class Tester {
         Match.getLastMatch();
     }
 
+    public static void test_updateScore() throws SQLException {
+        Team team1 = new Team("Egypt", 0,0);
+        team1.updateScore(1);
+    }
+
     public static void main(String args[]) throws SQLException {
-        test_addMatch();
+        //test_addMatch();
         //test_getLastMatch();
     }
 

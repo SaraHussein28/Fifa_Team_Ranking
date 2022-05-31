@@ -99,5 +99,13 @@ public class Team {
             System.out.println("Team Name : " + name + " , Score = " + score + " , Rank = " + rank);
         }
     }
+    public void updateScore(double newScore) throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement("update Teams set Score = ? where Name = ?");
+        pstmt.setDouble(1, newScore);
+        pstmt.setString(2, this.getName());
+
+        pstmt.execute();
+    }
 
 }
