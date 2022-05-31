@@ -95,7 +95,7 @@ public class Team {
             double score = rs.getDouble("Score");
             int rank = rs.getInt("Rank");
             teams_list.add(new Team(name,score,rank));
-            System.out.println("Team Name : " + name + " , Score = " + score + " , Rank = " + rank);
+            //System.out.println("Team Name : " + name + " , Score = " + score + " , Rank = " + rank);
         }
     }
     public void updatePoints() throws SQLException {
