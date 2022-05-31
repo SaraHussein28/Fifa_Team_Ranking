@@ -62,14 +62,16 @@ public class Tester {
     }
 
     public static void test_getScoreFromHistory() throws SQLException {
-        Team.getScoreFromHistory("Egypt",1, 2011);
+        Team.getScoreFromHistory("Egypt",3, 2011);
+        Team.getScoreFromHistory("Egypt",2, 2015);
+        Team.getScoreFromHistory("Egypt", 5,2008);
     }
 
     public static void main(String args[]) throws SQLException {
         //test_addMatch();
         //test_getLastMatch();
         //test_updateScore();
-        //test_getScoreFromHistory();
+        test_getScoreFromHistory();
     }
 
 

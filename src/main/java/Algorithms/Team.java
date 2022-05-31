@@ -118,10 +118,35 @@ public class Team {
         ResultSet rs = pstmt.executeQuery();
 
         if(rs.next()){
-            System.out.println(rs.getDouble("Score"));
+            //System.out.println(rs.getDouble("Score"));
             return rs.getDouble("Score");
         }
-        return 0;
-    }
+        else{
+            pstmt = Objects.requireNonNull(conn).prepareStatement(
+                    "select Score from score_history where TeamName = ? and Month < ? and Year = ? order by Month desc, MatchId desc limit 1");
+            pstmt.setString(1, TeamName);
+            pstmt.setInt(2, month);
+            pstmt.setInt(3, year);
+            rs = pstmt.executeQuery();
 
+            if(rs.next()){
+                //System.out.println(rs.getDouble("Score"));
+                return rs.getDouble("Score");
+            }
+            else{
+                pstmt = Objects.requireNonNull(conn).prepareStatement(
+                        "select Score from score_history where TeamName = ? and Year < ? order by Year desc, Month desc, MatchId desc limit 1");
+                pstmt.setString(1, TeamName);
+                pstmt.setInt(2, year);
+                rs = pstmt.executeQuery();
+
+                if(rs.next()){
+                   // System.out.println(rs.getDouble("Score"));
+                    return rs.getDouble("Score");
+                }
+                else return 0;
+            }
+        }
+
+    }
 }
