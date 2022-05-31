@@ -108,4 +108,20 @@ public class Team {
         pstmt.execute();
     }
 
+    public static double getScoreFromHistory(String TeamName, int month, int year) throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                "select Score from score_history where TeamName = ? and Month = ? and Year = ? order by MatchId desc limit 1");
+        pstmt.setString(1, TeamName);
+        pstmt.setInt(2, month);
+        pstmt.setInt(3, year);
+        ResultSet rs = pstmt.executeQuery();
+
+        if(rs.next()){
+            System.out.println(rs.getDouble("Score"));
+            return rs.getDouble("Score");
+        }
+        return 0;
+    }
+
 }

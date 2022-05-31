@@ -61,9 +61,15 @@ public class Tester {
         team1.updateScore(1);
     }
 
+    public static void test_getScoreFromHistory() throws SQLException {
+        Team.getScoreFromHistory("Egypt",1, 2011);
+    }
+
     public static void main(String args[]) throws SQLException {
         //test_addMatch();
         //test_getLastMatch();
+        //test_updateScore();
+        test_getScoreFromHistory();
     }
 
 
