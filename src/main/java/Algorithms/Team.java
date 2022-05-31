@@ -5,7 +5,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.util.List;
 import java.util.Objects;
 
 public class Team {
@@ -49,7 +48,7 @@ public class Team {
 
     public void calculateNewPoints(int importance, double win, double expectedWin, Boolean immunity) throws SQLException {
         double winDiff = calcWinDiff(win, expectedWin);
-        if (immunity == true){
+        if (immunity){
             if (win - expectedWin >= 0 ){
                 this.setPoints(this.points + importance * winDiff);
             }
