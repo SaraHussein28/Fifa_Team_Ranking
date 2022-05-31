@@ -142,6 +142,8 @@ public class HelloController {
             Match newMatch = new Match(team1, team2,category, round, team1Score, team2Score, isPSO,isInCalendar,
                     PSOWinningTeam, month, year);
 
+            newMatch.execDBMethods();
+
             System.out.println("New Match Added Successfully");
             System.out.println(newMatch.getYear() + newMatch.getTeam1().getName() + newMatch.getMonth()
                     + newMatch.getImportance() + newMatch.getTeam2().getName());

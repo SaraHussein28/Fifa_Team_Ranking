@@ -43,6 +43,10 @@ public class Match {
 
         team1.calculateNewPoints(importance,wins.getKey(),expectedWins.getKey(), immunity);
         team2.calculateNewPoints(importance,wins.getValue(),expectedWins.getValue(),immunity);
+
+
+    }
+    public void execDBMethods() throws SQLException {
         this.addMatch();
         this.updateID();
         this.addMatchToHistory();
