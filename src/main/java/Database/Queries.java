@@ -53,9 +53,7 @@ public class Queries {
 
     public Boolean getAllMatches() {
         Connection conn = MySQL_Connector.ConnectDB();
-
         try{
-
             Statement stmt = Objects.requireNonNull(conn).createStatement();
             ResultSet rs = stmt.executeQuery("select * from Matches");
 
@@ -73,8 +71,6 @@ public class Queries {
                 System.out.println("Match " + id + ":");
                 System.out.println("Team1 : " + team1 + " , Team1 score: " + team1_score
                         + " Team 2 : " + team2 + " , Team2 score " + team2_score);
-
-
             }
             return true;
         }catch(SQLException e){
@@ -102,5 +98,82 @@ public class Queries {
         System.out.println("Team1 : " + rs.getString("Team1") + " , Team1 score: " + rs.getString("Team1_Score")
                 + " Team 2 : " + rs.getString("Team2") + " , Team2 score " + rs.getString("Team2_Score"));
 
+    }
+    public Boolean deleteTeam(String TeamName) throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        try {
+            PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                    "delete from Teams where Name = ?");
+            pstmt.setString(1, TeamName);
+            pstmt.execute();
+            return true;
+        }catch(SQLException e){
+                return false;
+        }
+    }
+    public Boolean addTeam(String teamName, double score, int rank) throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        try {
+            PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                    "Insert into Teams (Name, Score, Rank) VALUES (?, ?, ?)");
+            pstmt.setString(1, teamName);
+            pstmt.setDouble(2, score);
+            pstmt.setInt(3, rank);
+            pstmt.execute();
+            return true;
+        } catch(SQLException e){
+            return false;
+        }
+    }
+    public Boolean addTeamMissingField(String teamName, double score) throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        try {
+            PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                    "Insert into Teams VALUES (?, ?)");
+            pstmt.setString(1, teamName);
+            pstmt.setDouble(2, score);
+            pstmt.execute();
+            return true;
+        } catch(SQLException e){
+            return false;
+        }
+    }
+
+    public static Boolean getScoreFromHistory(String TeamName, int month, int year) throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                "select Score from score_history where TeamName = ? and Month = ? and Year = ? order by MatchId desc limit 1");
+        pstmt.setString(1, TeamName);
+        pstmt.setInt(2, month);
+        pstmt.setInt(3, year);
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            System.out.println(rs.getDouble("Score"));
+            return true;
+        } else {
+            pstmt = Objects.requireNonNull(conn).prepareStatement(
+                    "select Score from score_history where TeamName = ? and Month < ? and Year = ? order by Month desc, MatchId desc limit 1");
+            pstmt.setString(1, TeamName);
+            pstmt.setInt(2, month);
+            pstmt.setInt(3, year);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                System.out.println(rs.getDouble("Score"));
+                return true;
+            } else {
+                pstmt = Objects.requireNonNull(conn).prepareStatement(
+                        "select Score from score_history where TeamName = ? and Year < ? order by Year desc, Month desc, MatchId desc limit 1");
+                pstmt.setString(1, TeamName);
+                pstmt.setInt(2, year);
+                rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+                    System.out.println(rs.getDouble("Score"));
+                    return true;
+                } else return false;
+            }
+        }
     }
 }

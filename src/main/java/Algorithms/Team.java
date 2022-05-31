@@ -146,6 +146,23 @@ public class Team {
                 else return 0;
             }
         }
+    }
 
+    public void deleteTeam() throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                "delete from Teams where Name = ?");
+        pstmt.setString(1, this.getName());
+        pstmt.execute();
+    }
+
+    public void addTeam(String teamName, double score, int rank) throws SQLException {
+        Connection conn = MySQL_Connector.ConnectDB();
+        PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                "Insert into Teams (Name, Score, Rank) VALUES (?, ?, ?)");
+        pstmt.setString(1, teamName);
+        pstmt.setDouble(2,score);
+        pstmt.setInt(3, rank);
+        pstmt.execute();
     }
 }
