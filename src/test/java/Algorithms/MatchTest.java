@@ -21,7 +21,7 @@ class MatchTest {
     void setup() throws SQLException {
         team1=new Team("Egypt",1500,5);
         team2=new Team("England",1600,2);
-        match=new Match(team1,team1, Match.Categories.World_Cup, Match.Rounds.Final,3,
+        match=new Match(team1,team2, Match.Categories.World_Cup, Match.Rounds.Final,3,
                 2,false,true,null,1,2001);
 
     }
@@ -152,9 +152,56 @@ class MatchTest {
         assertEquals(-140,difference,1e-15);
     }
 
-    @Test
-    void calculateWins() {
-        //Todo
+    @ParameterizedTest
+    @MethodSource("calculateWins_arguments")
+    void calculateWins(int team1Score, int team2Score,boolean PSO, Team PSOWinner,double team1expected,
+                       double team2expected){
+        Pair<Double,Double> result = match.calculateWins(team1Score,team2Score,PSO,PSOWinner);
+        assertEquals(team1expected,result.getKey());
+        assertEquals(team2expected,result.getValue());
+    }
+
+    private static Stream<Arguments> calculateWins_arguments(){
+        Team team1=new Team("Egypt",1500,5);
+        Team team2=new Team("England",1600,2);
+        return Stream.of(
+                // Format: team1 score, team2 score, is there a pso (boolean), winner team in case of pso, expected win
+                // for team1, expected win for team2
+
+                // Testing the case when there is a winner in the original time
+                // if the test case fails but the numbers are correct but just swapped this indicates the two teams may
+                // be swapped in the code
+                // if the numbers are completely wrong, then the calculation fo the number is flawed in the code
+                Arguments.of(2,0,false,null,1.0,0.0),
+                Arguments.of(0,2,false,null,0.0,1.0),
+
+                // Testing the case if the team is won in the original time but there is a penalty shootout winner
+                // even though there isn't a penalty shootout for some reason, the score should be the same if there
+                // wasn't a penalty shootout
+                Arguments.of(2,1,true,team1,1.0,0.0),
+                Arguments.of(2,4,true,team1,0.0,1.0),
+
+                // Testing the case of a match with no penalty shootout but the function was given a pso winner for some
+                // reason. The result however shouldn't be affected by that pso winner
+                Arguments.of(2,1,false,team1,1.0,0.0),
+                Arguments.of(2,1,false,team2,1.0,0.0),
+                Arguments.of(1,2,false,team1,0.0,1.0),
+                Arguments.of(1,2,false,team2,0.0,1.0),
+                Arguments.of(2,2,false,team1,0.5,0.5),
+                Arguments.of(3,3,false,team2,0.5,0.5),
+
+                //Testing the case of a draw but without a penalty shootout
+                Arguments.of(2,2,false,null,0.5,0.5),
+
+                //Testing the case of a draw with a penalty shootout, the winner should have 0.75 and the loser should
+                // have 0.5
+                Arguments.of(0,0,true,team1,0.75,0.5),
+                Arguments.of(2,2,true,team2,0.5,0.75),
+
+                //Testing the case of a draw with a penalty shootout, with a psoWinner = null for some reason
+                // the result should be 0 for both teams
+                Arguments.of(2,2,true,null,0.0,0.0)
+        );
     }
 
     @ParameterizedTest
