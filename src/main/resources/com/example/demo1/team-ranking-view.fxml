@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="700.0" styleClass="bodybg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.TeamRankingController">
+<AnchorPane prefHeight="700.0" prefWidth="700.0" styleClass="bodybg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.TeamRankingController">
    <children>
       <Text fill="WHITE" layoutX="154.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 10 FIFA WORLD RANKING " textAlignment="CENTER" wrappingWidth="417.15234375">
          <font>
@@ -18,8 +18,9 @@
       <ChoiceBox fx:id="month_choice_box" layoutX="300.0" layoutY="91.0" onAction="#onMonthDragDone" prefHeight="26.0" prefWidth="125.0" />
       <TableView fx:id="rankingTable" layoutX="136.0" layoutY="200.0" prefHeight="442.0" prefWidth="487.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="col_teamRank" prefWidth="84.66668701171875" text="Rank" />
+          <TableColumn fx:id="col_teamName" prefWidth="239.33338928222656" text="Team Name" />
+            <TableColumn fx:id="col_points" prefWidth="162.66659545898438" text="Points" />
         </columns>
       </TableView>
       <Label fx:id="monthRanking" layoutX="255.0" layoutY="154.0" text="APRIL-2022 Ranking" textFill="WHITE">
