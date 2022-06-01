@@ -50,7 +50,7 @@ public class History {
         ObservableList<History> list = FXCollections.observableArrayList();
 
 
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < allTeams.size(); i++){
 
             Team t =allTeams.get(i);
 
