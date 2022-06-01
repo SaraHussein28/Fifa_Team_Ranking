@@ -82,7 +82,7 @@ public class Logic_Database_Testing {
         assertEquals(2,list.get(1).getRank());
         assertEquals(3,list.get(2).getRank());
 
-        //These check that each time has its correct rank
+        //These check that each team has its correct rank
         assertEquals("Austria",list.get(0).getTeamName());
         assertEquals("Egypt",list.get(1).getTeamName());
         assertEquals("Germany",list.get(2).getTeamName());
@@ -100,7 +100,7 @@ public class Logic_Database_Testing {
         assertEquals(2,list.get(1).getRank());
         assertEquals(3,list.get(2).getRank());
 
-        //These check that each time has its correct rank
+        //These check that each team has its correct rank
         assertEquals("Egypt",list.get(0).getTeamName());
         assertEquals("Austria",list.get(1).getTeamName());
         assertEquals("Germany",list.get(2).getTeamName());
