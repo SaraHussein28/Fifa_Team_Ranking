@@ -60,9 +60,9 @@ public class TeamRankingController {
 *
 * */
     private void initializeChoiceBoxes() {
-        ObservableList<String> listOfMonths = FXCollections.observableArrayList("May-2022","April-2022", "March-2022", "February-2022", "January-2022", "December-2021", "November-2021", "October-2021", "September-2021", "August-2021", "July-2021", "June-2021", "May-2021", "April-2021");
+        ObservableList<String> listOfMonths = FXCollections.observableArrayList("June-2022","May-2022","April-2022", "March-2022", "February-2022", "January-2022", "December-2021", "November-2021", "October-2021", "September-2021", "August-2021", "July-2021", "June-2021", "May-2021", "April-2021");
 
-        month_choice_box.setValue("April-2022");
+        month_choice_box.setValue("June-2022");
         month_choice_box.setItems(listOfMonths);
         //rankingTable.setVisible(false);
     }
