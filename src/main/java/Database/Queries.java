@@ -1,5 +1,7 @@
 package Database;
 
+import Algorithms.Team;
+
 import java.sql.*;
 import java.util.Objects;
 
@@ -22,6 +24,23 @@ public class Queries {
             return true;
         }catch(SQLException e){
             return false;
+        }
+
+    }
+
+    public static ResultSet  getTeams(Team team)throws SQLException{
+        Connection conn = MySQL_Connector.ConnectDB();
+
+
+        try{
+            PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement
+                    ("select * from Teams where Name = ?");
+            pstmt.setString(1,team.getName());
+            ResultSet rs = pstmt.executeQuery();
+
+            return rs;
+        }catch(SQLException e){
+            throw new SQLException();
         }
 
     }
@@ -87,16 +106,17 @@ public class Queries {
             return false;
         }
     }
-    public void getLastMatch() throws SQLException {
+    public static ResultSet getLastMatch() throws SQLException {
         Connection conn = MySQL_Connector.ConnectDB();
         Statement stmt = Objects.requireNonNull(conn).createStatement();
         ResultSet rs = stmt.executeQuery("select * from Matches order by ID desc limit 1");
         rs.next();
 
-        System.out.println("Last match data:");
+        /*System.out.println("Last match data:");
         System.out.println("Match id : " + rs.getInt("Id"));
         System.out.println("Team1 : " + rs.getString("Team1") + " , Team1 score: " + rs.getString("Team1_Score")
-                + " Team 2 : " + rs.getString("Team2") + " , Team2 score " + rs.getString("Team2_Score"));
+                + " Team 2 : " + rs.getString("Team2") + " , Team2 score " + rs.getString("Team2_Score"));*/
+        return rs;
 
     }
     public Boolean deleteTeam(String TeamName) throws SQLException {
@@ -175,5 +195,119 @@ public class Queries {
                 } else return false;
             }
         }
+    }
+
+    private static void clearTables() throws SQLException{
+        Connection conn = MySQL_Connector.ConnectDB();
+        try {
+            PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement
+                    ("DELETE FROM score_history");
+            pstmt.execute();
+            pstmt = Objects.requireNonNull(conn).prepareStatement
+                    ("DELETE FROM matches");
+            pstmt.execute();
+            pstmt = Objects.requireNonNull(conn).prepareStatement
+                    ("DELETE FROM teams");
+            pstmt.execute();
+        } catch(SQLException e){
+            throw new SQLException();
+        }
+    }
+    private static void insertDummyTeams()throws SQLException{
+        Connection conn = MySQL_Connector.ConnectDB();
+        try {
+            PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                    "Insert into Teams (`Name`, `Score`, `Rank`) VALUES (?, ?, ?)");
+            pstmt.setString(1, "Austria");
+            pstmt.setDouble(2, 1500);
+            pstmt.setInt(3, 0);
+            pstmt.addBatch();
+            pstmt.setString(1, "Egypt");
+            pstmt.setDouble(2, 1500);
+            pstmt.setInt(3, 0);
+            pstmt.addBatch();
+            pstmt.setString(1, "Germany");
+            pstmt.setDouble(2, 1500);
+            pstmt.setInt(3, 0);
+            pstmt.addBatch();
+            pstmt.executeBatch();
+
+        } catch(SQLException e){
+            throw new SQLException();
+        }
+    }
+    private static void insertDummyMatches()throws SQLException{
+        Connection conn = MySQL_Connector.ConnectDB();
+        try {
+            PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                    "INSERT INTO Matches (`Id`,`Team1`,`Team2`,`Importance`,`Competition_type`,`Round`,`Team1_Score`,`Team2_Score`,`PSO`) VALUES (?,?,?,?,?,?,?,?,?)");
+            pstmt.setInt(1,1);
+            pstmt.setString(2, "Austria");
+            pstmt.setString(3,"Egypt");
+            pstmt.setInt(4,5);
+            pstmt.setString(5,"Friendly Match");
+            pstmt.setString(6,"Group Stage");
+            pstmt.setInt(7, 0);
+            pstmt.setInt(8, 0);
+            pstmt.setInt(9, 0);
+            pstmt.addBatch();
+            pstmt.setInt(1,2);
+            pstmt.setString(2, "Germany");
+            pstmt.setString(3,"Egypt");
+            pstmt.setInt(4,5);
+            pstmt.setString(5,"Friendly Match");
+            pstmt.setString(6,"Group Stage");
+            pstmt.setInt(7, 0);
+            pstmt.setInt(8, 0);
+            pstmt.setInt(9, 0);
+            pstmt.addBatch();
+            pstmt.executeBatch();
+
+        } catch(SQLException e){
+            throw new SQLException();
+        }
+    }
+
+    private static void insertDummyHistory()throws SQLException{
+        Connection conn = MySQL_Connector.ConnectDB();
+        try {
+            PreparedStatement pstmt = Objects.requireNonNull(conn).prepareStatement(
+                    "INSERT INTO score_history (`TeamName`,`MatchID`,`Month`,`Year`,`Score`) VALUES (?,?,?,?,?)");
+            pstmt.setString(1,"Austria");
+            pstmt.setInt(2,1);
+            pstmt.setInt(3,1);
+            pstmt.setInt(4,2021);
+            pstmt.setDouble(5,1500);
+            pstmt.addBatch();
+            pstmt.setString(1,"Egypt");
+            pstmt.setInt(2,1);
+            pstmt.setInt(3,1);
+            pstmt.setInt(4,2021);
+            pstmt.setDouble(5,1500);
+            pstmt.addBatch();
+            pstmt.setString(1,"Egypt");
+            pstmt.setInt(2,2);
+            pstmt.setInt(3,1);
+            pstmt.setInt(4,2021);
+            pstmt.setDouble(5,1500);
+            pstmt.addBatch();
+            pstmt.setString(1,"Germany");
+            pstmt.setInt(2,2);
+            pstmt.setInt(3,1);
+            pstmt.setInt(4,2021);
+            pstmt.setDouble(5,1500);
+            pstmt.addBatch();
+            pstmt.executeBatch();
+
+        } catch(SQLException e){
+            throw new SQLException();
+        }
+    }
+
+    public static void resetDB() throws SQLException {
+        clearTables();
+        insertDummyTeams();
+        insertDummyMatches();
+        insertDummyHistory();
     }
 }
