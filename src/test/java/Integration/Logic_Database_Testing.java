@@ -6,7 +6,6 @@ import Algorithms.Team;
 import Database.Queries;
 import com.example.demo1.History;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
