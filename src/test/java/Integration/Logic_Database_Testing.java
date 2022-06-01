@@ -39,6 +39,7 @@ public class Logic_Database_Testing {
 
     @Test
     void match_test() throws SQLException {
+        //This tests if the data sent to the match table, match those in the match class
         ResultSet rs = Queries.getLastMatch();
         assertEquals(match.getTeam1().getName(),rs.getString("Team1"));
         assertEquals(match.getTeam2().getName(),rs.getString("Team2"));
