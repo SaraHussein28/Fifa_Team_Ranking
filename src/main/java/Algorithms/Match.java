@@ -294,6 +294,21 @@ public class Match {
     public void setRound(Rounds round) {
         this.round = round;
     }
+    public Boolean getPSO() {
+        return PSO;
+    }
+
+    public Team getPSOWinningTeam() {
+        return PSOWinningTeam;
+    }
+
+    public int getTeam1score() {
+        return team1score;
+    }
+
+    public int getTeam2score() {
+        return team2score;
+    }
 
     public enum Rounds {
         Group_Stage("Group Stage"),
