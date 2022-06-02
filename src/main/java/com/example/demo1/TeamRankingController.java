@@ -39,7 +39,7 @@ public class TeamRankingController {
     protected void initialize() throws SQLException, InterruptedException {
 
         initializeChoiceBoxes();
-        initializeTable();
+        //initializeTable();
     }
 
     protected void initializeTable() throws SQLException, InterruptedException {
