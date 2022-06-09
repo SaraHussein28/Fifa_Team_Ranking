@@ -8,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="700.0" styleClass="bodybg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.TeamRankingController">
+<AnchorPane prefHeight="700.0" prefWidth="700.0" styleClass="bodybg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.TeamRankingController">
    <children>
-      <Text fill="WHITE" layoutX="154.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top 10 FIFA WORLD RANKING " textAlignment="CENTER" wrappingWidth="417.15234375">
+      <Text fill="WHITE" layoutX="154.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Top FIFA WORLD RANKING " textAlignment="CENTER" wrappingWidth="417.15234375">
          <font>
             <Font name="Arial Black" size="23.0" />
          </font>
