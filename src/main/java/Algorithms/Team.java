@@ -118,7 +118,11 @@ public class Team {
 
         if(rs.next()){
             //System.out.println(rs.getDouble("Score"));
-            return rs.getDouble("Score");
+            double temp = rs.getDouble("Score");
+            conn.close();
+            rs.close();
+            pstmt.close();
+            return temp;
         }
         else{
             pstmt = Objects.requireNonNull(conn).prepareStatement(
@@ -130,7 +134,11 @@ public class Team {
 
             if(rs.next()){
                 //System.out.println(rs.getDouble("Score"));
-                return rs.getDouble("Score");
+                double temp = rs.getDouble("Score");
+                conn.close();
+                rs.close();
+                pstmt.close();
+                return temp;
             }
             else{
                 pstmt = Objects.requireNonNull(conn).prepareStatement(
@@ -141,9 +149,19 @@ public class Team {
 
                 if(rs.next()){
                    // System.out.println(rs.getDouble("Score"));
-                    return rs.getDouble("Score");
+                    double temp = rs.getDouble("Score");
+                    conn.close();
+                    rs.close();
+                    pstmt.close();
+                    return temp;
                 }
-                else return 0;
+
+                else {
+                    conn.close();
+                    rs.close();
+                    pstmt.close();
+                    return 0;
+                }
             }
         }
     }
