@@ -29,7 +29,7 @@ import java.util.Objects;
 
 import java.io.IOException;
 
-public class HelloApplicationTest extends ApplicationTest {
+public class MainWindowApplicationTest extends ApplicationTest {
 
     Team England = new Team("England",0 ,0);
     Team France = new Team("France",0,0);

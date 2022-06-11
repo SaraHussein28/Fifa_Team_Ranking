@@ -19,7 +19,7 @@ import java.time.LocalDate;
 
 import static java.lang.Integer.parseInt;
 
-public class HelloController {
+public class MainWindowController {
 
 
     ObservableList <Team> listOfTeams;
