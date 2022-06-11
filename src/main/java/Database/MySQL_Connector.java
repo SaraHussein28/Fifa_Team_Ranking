@@ -1,5 +1,8 @@
 package Database;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 import java.sql.*;
 
 
@@ -18,6 +21,12 @@ public class MySQL_Connector {
             //establish db connection
             return DriverManager.getConnection(db_url, db_username, db_password);
         } catch (Exception e) {
+            Alert alert =
+                    new Alert(Alert.AlertType.ERROR,
+                            "Cannot connect to online database",
+                            ButtonType.OK);
+            alert.setTitle("Alert");
+            alert.showAndWait();
             return null;
         }
     }
