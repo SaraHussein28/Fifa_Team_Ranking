@@ -120,6 +120,10 @@ public class MainWindowController {
         else if (score_team_one.getText().isEmpty() || score_team_two.getText().isEmpty()){
             ViewUtil.createAlert(Alert.AlertType.ERROR, "Please enter all the fields").showAndWait();
         }
+        else if (!score_team_one.getText().matches("-?\\d+")||!score_team_two.getText().matches("-?\\d+")){
+            ViewUtil.createAlert(Alert.AlertType.ERROR, "Please enter an integer for team scores").showAndWait();
+            // check if the scores entered for both teams are integers
+        }
         else{
             Match.Categories category = category_choice_box.getValue();
             Match.Rounds round = null;
